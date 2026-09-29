@@ -27,7 +27,7 @@ export default function Navbar() {
 
   return (
     <div>
-      <nav ref={navRef} className="fixed w-full z-10 top-0 lg:p-5 shadow-md">
+      <nav ref={navRef} className="fixed w-full z-10 p-3 top-0 lg:p-3 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <NavLink to="/" className="shrink-0">
@@ -37,7 +37,7 @@ export default function Navbar() {
                     h-14
                     sm:h-16
                     md:h-20
-                    lg:h-24
+                    lg:h-20
                     xl:h-20
                     w-auto"
                   src="/kpan logo black.png"

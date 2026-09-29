@@ -59,7 +59,7 @@ const hasActiveChild = (items, pathname) =>
 
 // Class builders
 const mobileLinkClass = (isActive) =>
-  `block px-2 py-1 text-sm sm:text-base md:text-lg lg:text-xl font-medium border-b-2 w-fit ${
+  `block px-2 py-1 text-sm sm:text-base md:text-lg lg:text-xl font-medium w-full ${
     isActive
       ? 'border-[#ad8968] text-[#ad8968]'
       : 'border-transparent text-black hover:border-[#ad8968] hover:text-[#ad8968]'

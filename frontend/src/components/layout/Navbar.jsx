@@ -27,6 +27,9 @@ export default function Navbar() {
 
   return (
     <div>
+        <div>
+            
+        </div>
       <nav
         ref={navRef}
         className={`fixed w-full z-10 p-3 top-0 lg:p-3 shadow-md transition-colors duration-500 ease-in-out ${

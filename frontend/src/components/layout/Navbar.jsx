@@ -27,7 +27,7 @@ export default function Navbar() {
 
   return (
     <div>
-      <nav ref={navRef} className="fixed w-full z-10 top-0 lg:p-3 shadow-md">
+      <nav ref={navRef} className="fixed w-full z-10 top-0 lg:p-5 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <NavLink to="/" className="shrink-0">

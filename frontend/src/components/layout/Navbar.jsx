@@ -79,7 +79,7 @@ export default function Navbar() {
               aria-expanded={isOpen}
               className="lg:hidden ml-auto flex items-center gap-2 sm:gap-2 flex-shrink-0 cursor-pointer"
             >
-              <h1 className="menu text-sm sm:text-base md:text-lg lg:text-xl font-bold whitespace-nowrap">
+              <h1 className="menu text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl font-bold whitespace-nowrap">
                 Menu
               </h1>
               <div className="relative w-8 h-3 flex-shrink-0">

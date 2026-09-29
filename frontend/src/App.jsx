@@ -52,6 +52,7 @@ function App() {
           <Route path="/get-involved/wof" element={<WOF />} />
           <Route path="/get-involved/mof" element={<MOF />} />
           <Route path="/get-involved/kpan-community" element={<KPANCommunity />} />
+          <Route path="/get-involved/blogs" element={<Blogs />} />
 
           {/* Location group */}
           <Route path="/location" element={<Location />} />

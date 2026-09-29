@@ -5,7 +5,10 @@ import { AlignRight, X, ChevronRight, ChevronLeft } from 'lucide-react'
 
 // Navigation links data structure
 const navLinks = [
-  {
+
+    { name: 'Home', path: '/' },
+    
+  { 
     name: 'About',
     children: [
       { name: 'Who We Are', path: '/about/who-we-are' },
@@ -22,13 +25,14 @@ const navLinks = [
   },
   { name: 'Media', path: '/media' },
   { name: 'Give', path: '/give' },
-  { name: 'Blogs', path: '/blogs' },
+    
   {
     name: 'Get Involved',
     children: [
       { name: 'WOF', path: '/get-involved/wof' },
       { name: 'MOF', path: '/get-involved/mof' },
       { name: 'KPAN Community', path: '/get-involved/kpan-community' },
+      { name: 'Blogs', path: '/get-involved/blogs' },
     ],
   },
   { name: 'Events', path: '/events' },
@@ -197,7 +201,9 @@ export default function Navbar() {
           key={item.name}
           type="button"
           onClick={() => openSubmenu(item)}
-          className={`flex w-full items-center justify-between px-2 py-1 text-sm sm:text-base md:text-lg lg:text-xl font-medium border-b-2 
+          className={`flex w-full items-center bg-gray-100 rounded justify-between px-2 py-1 text-sm sm:text-base md:text-lg 
+            lg:text-xl 
+            font-medium border-b-2 
             border-transparent cursor-pointer ${
             hasActiveChild(item.children, pathname)
               ? 'text-[#ad8968]'
@@ -315,7 +321,7 @@ export default function Navbar() {
 
           {/* Mobile view */}
           <div
-            className={`lg:hidden grid transition-all duration-500 ease-in-out ${
+            className={`lg:hidden grid bg-amber-300/5 transition-all duration-500 ease-in-out pt-2 ${
               isOpen
                 ? 'grid-rows-[1fr] opacity-100 visible'
                 : 'grid-rows-[0fr] opacity-0 invisible'
@@ -358,8 +364,9 @@ export default function Navbar() {
                           type="button"
                           onClick={goBack}
                           aria-label={`Back to ${i === 0 ? 'main menu' : path[i - 1].name}`}
-                          className="flex w-fit items-center gap-3 px-2 py-1 text-sm sm:text-base md:text-lg lg:text-xl font-normal 
-                          text-black hover:text-[#ad8968] cursor-pointer"
+                          className="flex w-full items-center rounded-t-2xl bg-gray-100 gap-3 px-2 py-1 text-sm sm:text-base md:text-lg lg:text-xl
+                           font-normal 
+                          text-black hover:font-bold hover:transition-all hover:duration-500 cursor-pointer"
                         >
                           <ChevronLeft className="w-5 h-5 flex-shrink-0" />
                           <span>{group.name}</span>

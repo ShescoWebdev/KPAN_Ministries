@@ -231,7 +231,7 @@ export default function Navbar() {
       <nav
         ref={navRef}
         onMouseLeave={closeDesktop}
-        className={`fixed w-full z-10 p-3 top-0 lg:p-3 shadow-md transition-colors duration-500 lg:duration-300 ease-in-out ${
+        className={`bg-white fixed w-full z-10 p-3 top-0 lg:p-3 shadow-md transition-colors duration-500 lg:duration-300 ease-in-out ${
           isOpen ? 'bg-white lg:bg-transparent' : desktopMenu.open ? 'lg:bg-white' : ''
         }`}
       >

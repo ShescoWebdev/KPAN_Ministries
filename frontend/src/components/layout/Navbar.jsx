@@ -79,7 +79,7 @@ export default function Navbar() {
               aria-expanded={isOpen}
               className="lg:hidden ml-auto flex items-center gap-2 sm:gap-2 flex-shrink-0 cursor-pointer"
             >
-              <h1 className="menu text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl font-bold whitespace-nowrap">
+              <h1 className="menu text-gray-700 text-sm sm:text-base md:text-lg lg:text-xl font-bold whitespace-nowrap">
                 Menu
               </h1>
               <div className="relative w-8 h-3 flex-shrink-0">
@@ -114,7 +114,7 @@ export default function Navbar() {
                     end={link.path === '/'}
                     onClick={() => setIsOpen(false)}
                     className={({ isActive }) =>
-                      `block px-2 py-1 text-lg font-medium border-b-2 w-fit ${
+                      `block px-2 py-1 text-sm sm:text-base md:text-lg lg:text-xl font-medium border-b-2 w-fit ${
                         isActive
                           ? 'border-[#ad8968] text-[#ad8968]'
                           : 'border-transparent text-black hover:border-[#ad8968] hover:text-[#ad8968]'

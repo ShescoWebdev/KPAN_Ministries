@@ -330,7 +330,7 @@ export default function Navbar() {
             <div className="overflow-hidden">
               <div className="bg-white border-t border-gray-300">
                 <div
-                  className="overflow-hidden transition-[height] duration-500 ease-in-out"
+                  className="overflow-x-hidden overflow-y-auto overscroll-contain max-h-[calc(100dvh-7rem)] transition-[height] duration-500 ease-in-out"
                   style={{ height: menuHeight }}
                 >
                   <div

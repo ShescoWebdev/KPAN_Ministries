@@ -155,7 +155,7 @@ function Home() {
     <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-center md:text-start">
       Join us for our Equipping Meetings, where we provide practical teachings and resources to help you grow in your faith and live out your calling.
         <br /><br />
-      It comes on the <b>first day of the week</b>, that's <b>every Sunday, at 02:00 PM.</b> We encourage you to come and be equipped for the journey ahead.
+      It comes on the <b>1st day of the week</b>, that's <b>every Sunday, at 02:00 PM.</b> We encourage you to come and be equipped for the journey ahead.
 
       <br /><br />
       <b>Venue:</b> NAAT Multi-Purpose Hall, behind June 12 FACOOP Supermarket, UNIBEN.
@@ -218,8 +218,84 @@ function Home() {
           These meetings have been designed to bring us closer with one another even as we grow in fellowship with the Lord.
           <br /><br />
 
-           It comes up every second day of the week, that's <b>every Monday, at 05:00 PM. </b> 
+           It comes up every <b>2nd day of the week</b>, that's <b>every Monday, at 05:00 PM. </b> 
            <b>Join in a cell centre closest to you</b>. We encourage you to come and be a part of this vibrant community of believers.
+        </p>
+      </div>
+ </section>
+
+
+ <section className="mt-20 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-20 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
+  <div className="w-full min-w-0 md:flex-1">
+    <h2 className="home-h2 text-sm md:text-base font-bold text-[#5d5c5c] text-center md:text-start ">
+      Bible Study Meeting
+    </h2>
+
+    <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-center md:text-start">
+      Join us for our Bible Study Meetings, where we dive deep into the Word of God and explore its relevance to our daily lives.
+      It comes on every <b>5th day of the week</b>, that's <b>every Thursday, at 04:00 PM.</b>
+
+      <br /><br />
+      <b>Venue:</b> NAAT Multi-Purpose Hall, behind June 12 FACOOP Supermarket, UNIBEN. <br />
+      Let's come together to study the Bible, ask questions, and grow in our understanding of God's Word. We look forward to seeing you there!
+    </p>
+  </div>
+
+  <div className="w-full min-w-0 md:flex-1">
+    <img
+      className="
+      mx-auto
+      w-[20rem]
+      h-[25rem]
+      sm:w-[25rem]
+      sm:h-[30rem]
+      md:w-[30rem]
+      md:h-[39rem]
+      object-cover
+      rounded-lg
+      shadow-md
+      "
+      src="/SOTK.jpeg"
+      alt="Bible Study Meeting"
+      loading="lazy"
+    />
+  </div>
+</section>
+
+
+
+<section className="mt-20 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-20 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
+      <div className="w-full min-w-0 md:flex-1 order-2 md:order-1">
+        <img 
+        className="
+        mx-auto
+        w-[20rem]
+        h-[25rem]
+        sm:w-[25rem]
+        sm:h-[30rem]
+        md:w-[33rem]
+        md:h-[38rem]
+        object-cover
+        rounded-lg
+        shadow-md
+        "
+        src="/SOPS.jpeg" 
+        alt="SOPS" />
+      </div>
+
+      <div className="w-full min-w-0 md:flex-1 order-1 md:order-2">
+        <h2 className="home-h2 text-sm md:text-base font-bold text-[#5d5c5c] text-center md:text-start">
+          School Of Prayer And The Supernatural (SOPS)
+        </h2>
+        <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-center md:text-start">
+          Dear beloved,
+          Do you desire to enlarge your prayer capacity or have burdens on your heart? Come as we are taught the practice of prayer and the supernatural in SOPS meeting.
+
+          <br /><br />
+          <b>Time:</b> 4pm <br />
+          <b> Venue:</b> NAAT Multi-purpose Hall, UNIBEN.
+          <br />
+          <b>Day:</b> Every 7th day of the week, that's <b>every Saturday.</b>
         </p>
       </div>
  </section>

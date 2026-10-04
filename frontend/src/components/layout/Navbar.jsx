@@ -318,19 +318,19 @@ export default function Navbar() {
               </div>
             </button>
           </div>
-
+                    
           {/* Mobile view */}
           <div
             className={`lg:hidden grid bg-amber-300/5 transition-all duration-500 ease-in-out pt-2 ${
-              isOpen
+              isOpen 
                 ? 'grid-rows-[1fr] opacity-100 visible'
                 : 'grid-rows-[0fr] opacity-0 invisible'
             }`}
           >
             <div className="overflow-hidden">
               <div className="bg-white border-t border-gray-300">
-                <div
-                  className="overflow-x-hidden overflow-y-auto overscroll-contain max-h-[calc(100dvh-7rem)] transition-[height] duration-500 ease-in-out"
+                <div 
+                  className="overflow-hidden transition-[height] duration-500 ease-in-out"
                   style={{ height: menuHeight }}
                 >
                   <div

@@ -37,7 +37,7 @@ function Home() {
     <div>
       <section
         aria-label="Hero"
-        className="relative mt-[5.5rem] h-[calc(100svh-5.5rem)] min-h-[26rem] w-full overflow-hidden bg-black"
+        className="relative mt-[5rem] md:mt-[5.5rem] h-[calc(100svh-5.5rem)] min-h-[26rem] w-full overflow-hidden bg-black"
       >
         {/* Video carousel */}
         {heroVideos.map((src, i) => (

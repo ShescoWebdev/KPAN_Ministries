@@ -145,15 +145,23 @@ function Home() {
       </section>
 
 
-      <section className="mt-8 md:mt-16 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-20 md:gap-8 lg:gap-16 items-center mb-10">
+      <section className="mt-8 md:mt-16 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-20 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
   {/* Text comes first in the code, so it always sits above the image on mobile */}
   <div className="w-full min-w-0 md:flex-1">
-    <h2 className="home-h2 text-sm md:text-base font-bold text-[#898989] text-center md:text-start ">
+    <h2 className="home-h2 text-sm md:text-base font-bold text-[#5d5c5c] text-center md:text-start ">
       Equipping Meeting
     </h2>
 
-    <p className="home-p mt-2 text-sm md:text-base text-[#848484] text-center md:text-start">
-      Join us for our equipping meetings where we provide practical teachings and resources to help you grow in your faith and live out your calling.
+    <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-center md:text-start">
+      Join us for our Equipping Meetings, where we provide practical teachings and resources to help you grow in your faith and live out your calling.
+        <br /><br />
+      It comes on the <b>first day of the week</b>, that's <b>every Sunday, at 02:00 PM.</b> We encourage you to come and be equipped for the journey ahead.
+
+      <br /><br />
+      <b>Venue:</b> NAAT Multi-Purpose Hall, behind June 12 FACOOP Supermarket, UNIBEN.
+
+      <br /><br />
+      Do well to come with your <b>Bible</b>, <b>notebook</b>, and <b>pen</b>. We look forward to seeing you there!
     </p>
   </div>
 
@@ -161,19 +169,60 @@ function Home() {
     <img
       className="
       mx-auto
-      w-full
-      max-w-md
-      md:max-w-none
-      aspect-[4/3]
+      w-[20rem]
+      h-[25rem]
+      sm:w-[25rem]
+      sm:h-[30rem]
+      md:w-[30rem]
+      md:h-[39rem]
       object-cover
       rounded-lg
-      shadow-md"
+      shadow-md
+      "
       src="/Equipping Meeting.jpeg"
       alt="Equipping Meeting"
       loading="lazy"
     />
   </div>
 </section>
+
+ <section className="mt-20 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-20 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
+      <div className="w-full min-w-0 md:flex-1 order-2 md:order-1">
+        <img 
+        className="
+        mx-auto
+        w-[20rem]
+        h-[25rem]
+        sm:w-[25rem]
+        sm:h-[30rem]
+        md:w-[33rem]
+        md:h-[38rem]
+        object-cover
+        rounded-lg
+        shadow-md
+        "
+        src="/Cell Meeting.jpeg" 
+        alt="Cell Meeting" />
+      </div>
+
+      <div className="w-full min-w-0 md:flex-1 order-1 md:order-2">
+        <h2 className="home-h2 text-sm md:text-base font-bold text-[#5d5c5c] text-center md:text-start">
+          Cell Meeting
+        </h2>
+        <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-center md:text-start">
+          <b>Don't miss</b> Cell meeting! <br />
+          It's a day of intentional gathering and fellowship together as we meet.
+          Join us for our Cell Meetings, where we gather in small groups to study the Bible, pray, and support one another in our faith journey.
+
+          <br /><br />
+          These meetings have been designed to bring us closer with one another even as we grow in fellowship with the Lord.
+          <br /><br />
+
+           It comes up every second day of the week, that's <b>every Monday, at 05:00 PM. </b> 
+           <b>Join in a cell centre closest to you</b>. We encourage you to come and be a part of this vibrant community of believers.
+        </p>
+      </div>
+ </section>
     </div>
   )
 }

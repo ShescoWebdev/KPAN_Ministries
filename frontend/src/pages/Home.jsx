@@ -289,7 +289,7 @@ function Home() {
         <h2 className="home-h2 text-[22px] md:text-base font-bold text-[#5d5c5c] text-center md:text-start">
           School Of Prayer And The Supernatural (SOPS)
         </h2>
-        <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-center md:text-start">
+        <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-start md:text-start">
           Dear beloved,
           Do you desire to enlarge your prayer capacity or have burdens on your heart? Come as we are taught the practice of prayer and the supernatural in SOPS meeting.
 

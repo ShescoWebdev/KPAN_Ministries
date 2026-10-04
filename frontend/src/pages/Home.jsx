@@ -78,6 +78,7 @@ function Home() {
         <div>
           <img
             className="
+          text-white
             h-14
             sm:h-16
             md:h-20
@@ -145,10 +146,10 @@ function Home() {
       </section>
 
 
-      <section className="mt-8 md:mt-16 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-20 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
+      <section className="mt-8 md:mt-16 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-13 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
   {/* Text comes first in the code, so it always sits above the image on mobile */}
   <div className="w-full min-w-0 md:flex-1">
-    <h2 className="home-h2 text-sm md:text-base font-bold text-[#5d5c5c] text-center md:text-start ">
+    <h2 className="home-h2 text-[22px] md:text-base font-bold text-[#5d5c5c] text-center md:text-start ">
       Equipping Meeting
     </h2>
 
@@ -186,7 +187,7 @@ function Home() {
   </div>
 </section>
 
- <section className="mt-20 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-20 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
+ <section className="mt-32 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-10 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
       <div className="w-full min-w-0 md:flex-1 order-2 md:order-1">
         <img 
         className="
@@ -206,7 +207,7 @@ function Home() {
       </div>
 
       <div className="w-full min-w-0 md:flex-1 order-1 md:order-2">
-        <h2 className="home-h2 text-sm md:text-base font-bold text-[#5d5c5c] text-center md:text-start">
+        <h2 className="home-h2 text-[22px] md:text-base font-bold text-[#5d5c5c] text-center md:text-start">
           Cell Meeting
         </h2>
         <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-center md:text-start">
@@ -225,9 +226,9 @@ function Home() {
  </section>
 
 
- <section className="mt-20 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-20 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
+ <section className="mt-32 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-10 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
   <div className="w-full min-w-0 md:flex-1">
-    <h2 className="home-h2 text-sm md:text-base font-bold text-[#5d5c5c] text-center md:text-start ">
+    <h2 className="home-h2 text-[22px] md:text-base font-bold text-[#5d5c5c] text-center md:text-start ">
       Bible Study Meeting
     </h2>
 
@@ -264,7 +265,8 @@ function Home() {
 
 
 
-<section className="mt-20 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-20 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
+
+<section className="mt-32 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-10 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
       <div className="w-full min-w-0 md:flex-1 order-2 md:order-1">
         <img 
         className="
@@ -284,7 +286,7 @@ function Home() {
       </div>
 
       <div className="w-full min-w-0 md:flex-1 order-1 md:order-2">
-        <h2 className="home-h2 text-sm md:text-base font-bold text-[#5d5c5c] text-center md:text-start">
+        <h2 className="home-h2 text-[22px] md:text-base font-bold text-[#5d5c5c] text-center md:text-start">
           School Of Prayer And The Supernatural (SOPS)
         </h2>
         <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-center md:text-start">

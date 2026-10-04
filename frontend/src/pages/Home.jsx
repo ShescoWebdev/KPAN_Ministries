@@ -145,7 +145,7 @@ function Home() {
       </section>
 
 
-      <section className="mt-8 md:mt-16 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-20 md:gap-8 lg:gap-16 items-center">
+      <section className="mt-8 md:mt-16 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-20 md:gap-8 lg:gap-16 items-center mb-10">
   {/* Text comes first in the code, so it always sits above the image on mobile */}
   <div className="w-full min-w-0 md:flex-1">
     <h2 className="home-h2 text-sm md:text-base font-bold text-[#898989] text-center md:text-start ">

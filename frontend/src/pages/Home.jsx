@@ -329,13 +329,13 @@ function Home() {
   {/* Text comes first in the code, so it always sits above the image on mobile */}
   <div className="w-full min-w-0 md:flex-1">
     <Reveal>
-      <h2 className="home-h2 text-[22px] md:text-base font-bold text-[#5d5c5c] text-center md:text-start ">
+      <h2 className="home-h2 text-[22px] md:text-base font-bold text-[#282828] text-center md:text-start ">
         Equipping Meeting
       </h2>
     </Reveal>
 
     <Reveal delay={150}>
-      <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-center md:text-start">
+      <p className="home-p mt-2 text-sm md:text-lg text-[#6b6b6b] text-center md:text-start">
         Join us for our Equipping Meetings, where we provide practical teachings and resources to help you grow in your faith and live out your calling.
           <br /><br />
         It comes on the <b>1st day of the week</b>, that's <b>every Sunday, at 02:00 PM.</b> We encourage you to come and be equipped for the journey ahead.
@@ -395,7 +395,7 @@ function Home() {
 
       <div className="w-full min-w-0 md:flex-1 order-1 md:order-2">
         <Reveal delay={150}>
-          <h2 className="home-h2 text-[22px] md:text-base font-bold text-[#5d5c5c] text-center md:text-start">
+          <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start">
             Cell Meeting
           </h2>
         </Reveal>
@@ -421,13 +421,13 @@ function Home() {
  <section className="mt-32 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-10 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
   <div className="w-full min-w-0 md:flex-1">
     <Reveal>
-      <h2 className="home-h2 text-[22px] md:text-base font-bold text-[#5d5c5c] text-center md:text-start ">
+      <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start ">
         Bible Study Meeting
       </h2>
     </Reveal>
 
     <Reveal delay={150}>
-      <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-center md:text-start">
+      <p className="home-p mt-2 text-sm md:text-lg text-[#6b6b6b] text-center md:text-start">
         Join us for our Bible Study Meetings, where we dive deep into the Word of God and explore its relevance to our daily lives.
         It comes on every <b>5th day of the week</b>, that's <b>every Thursday, at 04:00 PM.</b>
 
@@ -487,7 +487,7 @@ function Home() {
 
       <div className="w-full min-w-0 md:flex-1 order-1 md:order-2">
         <Reveal delay={150}>
-          <h2 className="home-h2 text-[22px] md:text-base font-bold text-[#5d5c5c] text-center md:text-start">
+          <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start">
             School Of Prayer And The Supernatural (SOPS)
           </h2>
         </Reveal>

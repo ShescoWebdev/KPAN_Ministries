@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { ArrowUpRight, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
 import Reveal from '../components/common/Reveal'
 
 // Hero videos
@@ -9,22 +10,22 @@ const heroVideos = [
   'https://res.cloudinary.com/detg3ravj/video/upload/v1791106529/Vid_5_fdzbu3.mp4',
 ]
 
-// How long the slide takes to land (or spring back) after you lift your finger
+// Settle animation duration
 const SETTLE_MS = 500
 
-// The finger-follow slide is for phones only: below Tailwind's md breakpoint, where the arrows are hidden
+// Mobile mode for carousel slide
 const isMobileView = () => window.matchMedia('(max-width: 767px)').matches
 
 function Home() {
   const [current, setCurrent] = useState(0)
   const videoRefs = useRef([])
+  const heroRef = useRef(null)
   const total = heroVideos.length
 
-  // Swipe-follow state: the clip tracks your finger, then settles or springs back
   const [dragX, setDragX] = useState(0)
-  const [dragDir, setDragDir] = useState(1) // 1 = heading to the next clip, -1 = the previous one
-  const [phase, setPhase] = useState('idle') // 'idle' | 'dragging' | 'settling'
-  const [instant, setInstant] = useState(false) // skips transitions for one beat during the handoff
+  const [dragDir, setDragDir] = useState(1) 
+  const [phase, setPhase] = useState('idle') 
+  const [instant, setInstant] = useState(false)
   const touchRef = useRef({
     startX: 0,
     startY: 0,
@@ -43,7 +44,13 @@ function Home() {
     setCurrent((index + total) % total)
   }
 
-  // Hands control back to normal mode once the slide animation has finished
+  // To smoothly scroll past hero to the first section
+  const scrollToContent = () => {
+    if (!heroRef.current) return
+    window.scrollTo({ top: heroRef.current.offsetHeight, behavior: 'smooth' })
+  }
+
+  // Back to idle state after a drag or settle animation
   const finishSwipe = (commit, dir) => {
     setInstant(true)
     setPhase('idle')
@@ -51,13 +58,12 @@ function Home() {
     if (commit) {
       goTo(current + dir)
     } else if (total > 1 && videoRefs.current[current]?.ended) {
-      // The clip finished while the finger was down, so move on now
       goTo(current + 1)
     }
     instantTimer.current = setTimeout(() => setInstant(false), 80)
   }
 
-  // Animates to the next/previous clip (commit) or back to where it started (cancel)
+  // To animate to next or previous video after a drag or settle animation
   const settle = (commit) => {
     const { width, dir } = touchRef.current
     touchRef.current.locked = 'ignore'
@@ -68,7 +74,6 @@ function Home() {
 
   const handleTouchStart = (e) => {
     if (e.touches.length !== 1) {
-      // A second finger (pinch) cancels any drag in progress
       if (touchRef.current.locked === 'x') settle(false)
       touchRef.current.locked = 'ignore'
       return
@@ -92,12 +97,10 @@ function Home() {
 
   const handleTouchMove = (e) => {
     const touch = touchRef.current
-    // Larger screens skip the drag entirely and keep the original swipe behaviour
     if (!touch.mobile || touch.locked === 'ignore' || touch.locked === 'y' || e.touches.length !== 1) return
     const dx = e.touches[0].clientX - touch.startX
     const dy = e.touches[0].clientY - touch.startY
 
-    // Decide once whether this gesture is a horizontal swipe or a vertical page scroll
     if (touch.locked === null) {
       if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return
       touch.locked = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'
@@ -115,12 +118,10 @@ function Home() {
     const touch = touchRef.current
     if (touch.locked === 'ignore') return
 
-    // Larger screens: the original behaviour, a quick swipe changes the clip with the soft crossfade
     if (!touch.mobile) {
       const diffX = e.changedTouches[0].clientX - touch.startX
       const diffY = e.changedTouches[0].clientY - touch.startY
       touch.locked = 'ignore'
-      // Only count mostly-horizontal swipes of 50px or more
       if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
         goTo(diffX < 0 ? current + 1 : current - 1)
       }
@@ -132,7 +133,6 @@ function Home() {
       return
     }
     const velocity = Math.abs(touch.dx) / Math.max(1, Date.now() - touch.startTime)
-    // Commit on a long enough drag (50px+ and a quarter of the screen) or a quick flick
     const isSwipe =
       Math.abs(touch.dx) >= 50 && (Math.abs(touch.dx) > touch.width * 0.25 || velocity > 0.4)
     settle(isSwipe)
@@ -169,8 +169,9 @@ function Home() {
   return (
     <div>
       <section
+        ref={heroRef}
         aria-label="Hero"
-        className="relative mt-[5rem] md:mt-[5.5rem] h-[calc(100svh-5.5rem)] min-h-[26rem] w-full overflow-hidden bg-black touch-pan-y touch-pinch-zoom"
+        className="relative min-h-svh w-full overflow-hidden bg-black touch-pan-y touch-pinch-zoom"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -230,95 +231,156 @@ function Home() {
           )
         })}
 
-        {/* Dim overlay for text visibility */}
-        <div className="absolute inset-0 bg-black/30" />
+        {/* Dim bluish overlay for text visibility */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(to bottom, rgba(78, 56, 160, 0.45) 0%, rgba(58, 38, 132, 0.58) 55%, rgba(34, 20, 92, 0.8) 100%)',
+          }}
+        />
+
+        {/* Faint oversized name behind the text */}
+        <span
+          aria-hidden="true"
+          className="font-brand-serif pointer-events-none absolute -bottom-[0.12em] -left-[0.03em] z-[1] select-none whitespace-nowrap text-[length:clamp(9rem,30vw,32rem)] italic leading-none text-white/10"
+        >
+          K-PAN
+        </span>
 
         {/* Hero text */}
-        <div className="relative z-[1] flex h-full flex-col items-center justify-center gap-2 px-4">
-          <Reveal delay={200}>
-            <h1 className="hero-h1 text-center font-bold tracking-tight text-white drop-shadow-lg text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-5xl">
-              K-PAN Ministries
-            </h1>
-          </Reveal>
+        <div className="relative z-[2] mx-auto flex min-h-svh w-full max-w-[1600px] flex-col px-5 pb-8 pt-28 sm:px-8 xl:px-10">
+          <div className="flex flex-1 flex-col items-start justify-center py-10 text-left">
+            <Reveal origin="origin-left" delay={200}>
+              <p className="font-brand-serif text-3xl italic text-white sm:text-4xl">Welcome to</p>
+              <div className="mt-2 flex items-center gap-4">
+                <span className="h-px w-10 bg-white/70" />
+                <span className="font-brand-sans text-[11px] font-medium uppercase tracking-[0.3em] text-white/80 sm:text-xs">
+                  The Fullness Church
+                </span>
+              </div>
+            </Reveal>
 
-          <Reveal delay={500}>
-            <p className="hero-p text-center text-white/80 drop-shadow-md text-lg sm:text-xl md:text-2xl">
-              The Fullness Church
-            </p>
-          </Reveal>
+            <Reveal origin="origin-left" delay={350}>
+              <h1 className="font-brand-serif mt-4 text-[length:clamp(3.25rem,10.5vw,10.5rem)] leading-[0.92] tracking-tight text-white">
+                K-PAN <em className="italic text-[#ff6a00]">Ministries</em>
+              </h1>
+            </Reveal>
 
-          <Reveal delay={800}>
-            <img
-              className="
-            text-white
-              h-14
-              sm:h-16
-              md:h-20
-              lg:h-20
-              xl:h-20
-              w-auto"
-              src="/kpan logo white.png"
-              alt="KPAN Logo"
-                  />
-          </Reveal>
-        </div>
+            <Reveal origin="origin-left" delay={500}>
+              <div className="my-6 h-px w-16 bg-white/60 sm:my-9" />
+              <p className="font-brand-sans max-w-2xl text-base text-white/85 sm:text-xl lg:text-2xl">
+                A community of believers dedicated to sharing the love of Christ.
+              </p>
+            </Reveal>
 
-        {/* Prev / next arrows */}
-        {total > 1 && (
-          <>
-            <button
-              type="button"
-              onClick={() => goTo(current - 1)}
-              aria-label="Previous video"
-              className="absolute left-4 top-1/2 z-[2] hidden -translate-y-1/2 cursor-pointer rounded-full bg-black/30 p-2 text-white transition-colors duration-300 hover:bg-black/50 md:block"
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </button>
-            <button
-              type="button"
-              onClick={() => goTo(current + 1)}
-              aria-label="Next video"
-              className="absolute right-4 top-1/2 z-[2] hidden -translate-y-1/2 cursor-pointer rounded-full bg-black/30 p-2 text-white transition-colors duration-300 hover:bg-black/50 md:block"
-            >
-              <ChevronRight className="h-6 w-6" />
-            </button>
-          </>
-        )}
+            <Reveal origin="origin-left" delay={650}>
+              <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-5 sm:mt-10">
+                <Link
+                  to="/online-church"
+                  className="group inline-flex items-center gap-4 rounded-full bg-[#ff6a00] px-7 py-4 text-white transition-colors duration-300 hover:bg-[#ff8a33] sm:px-8 sm:py-5"
+                >
+                  <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-white" />
+                  <span className="font-brand-serif text-2xl italic sm:text-[1.7rem]">Watch live now</span>
+                  <ArrowUpRight className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </Link>
 
-        {/* Dot indicators */}
-        {total > 1 && (
-          <div className="absolute bottom-6 left-1/2 z-[2] flex -translate-x-1/2 items-center gap-3">
-            {heroVideos.map((src, i) => (
-              <button
-                key={`${src}-dot-${i}`}
-                type="button"
-                onClick={() => goTo(i)}
-                aria-label={`Show video ${i + 1}`}
-                aria-current={i === current}
-                className={`h-2.5 cursor-pointer rounded-full transition-all duration-500 ease-in-out ${
-                  i === current ? 'w-8 bg-[#ad8968]' : 'w-2.5 bg-white/60 hover:bg-white'
-                }`}
-              />
-            ))}
+                <Link
+                  to="/location"
+                  className="font-brand-sans group inline-flex items-center gap-2 border-b border-white/70 pb-1 text-xs font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-300 hover:border-[#ff6a00] hover:text-[#ff6a00] sm:text-sm"
+                >
+                  Plan your visit
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </Reveal>
+
+            {/* Prev / next arrows */}
+            {total > 1 && (
+              <Reveal origin="origin-left" delay={800}>
+                <div className="mt-8 flex items-center gap-3 sm:mt-10">
+                  <button
+                    type="button"
+                    onClick={() => goTo(current - 1)}
+                    aria-label="Previous video"
+                    className="grid h-11 w-11 cursor-pointer place-items-center rounded-full border border-white/50 bg-black/20 text-white backdrop-blur-sm transition-colors duration-300 hover:bg-white/20"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => goTo(current + 1)}
+                    aria-label="Next video"
+                    className="grid h-11 w-11 cursor-pointer place-items-center rounded-full border border-white/50 bg-black/20 text-white backdrop-blur-sm transition-colors duration-300 hover:bg-white/20"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+
+                  {/* Dot indicators */}
+                  <div className="ml-3 flex items-center gap-3">
+                    {heroVideos.map((src, i) => (
+                      <button
+                        key={`${src}-dot-${i}`}
+                        type="button"
+                        onClick={() => goTo(i)}
+                        aria-label={`Show video ${i + 1}`}
+                        aria-current={i === current}
+                        className={`h-2.5 cursor-pointer rounded-full transition-all duration-500 ease-in-out ${
+                          i === current ? 'w-8 bg-[#ff6a00]' : 'w-2.5 bg-white/60 hover:bg-white'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            )}
           </div>
-        )}
+
+          <div className="flex flex-col items-start gap-8 sm:flex-row sm:items-end sm:justify-between">
+            <Reveal origin="origin-left" delay={900}>
+              <button
+                type="button"
+                onClick={scrollToContent}
+                className="group flex cursor-pointer items-center gap-4 text-white"
+              >
+                <span className="font-brand-sans text-[11px] font-medium uppercase tracking-[0.3em] sm:text-xs">
+                  Scroll to discover
+                </span>
+                <span className="grid h-12 w-12 place-items-center rounded-full border border-white/40 transition-colors duration-300 group-hover:bg-white/15">
+                  <ChevronDown className="h-5 w-5" />
+                </span>
+              </button>
+            </Reveal>
+
+            <Reveal origin="origin-right" delay={1000}>
+              <div className="text-left sm:text-right">
+                <p className="font-brand-serif text-2xl italic text-white sm:text-3xl">
+                  One city, one family.
+                </p>
+                <p className="font-brand-sans mt-1 text-[10px] font-medium uppercase tracking-[0.22em] text-white/70 sm:text-xs">
+                  Touched · Transformed · Empowered
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </div>
       </section>
 
 
 
       <section className="mt-20 md:mt-32 px-4 text-center">
         <Reveal>
-          <h2 className="text-xl sm:text-[22px] md:text-3xl lg:text-3xl xl:text-3xl font-bold text-[#999898]">The Fullness Church is a church that believes in Jesus, a  <br className='hidden md:block' /> church that loves God and people.</h2>
+          <h2 className="text-xl sm:text-[22px] md:text-3xl lg:text-3xl xl:text-3xl font-bold text-[#999898] transition-colors duration-500 dark:text-white">The Fullness Church is a church that believes in Jesus, a  <br className='hidden md:block' /> church that loves God and people.</h2>
         </Reveal>
 
         <Reveal delay={150}>
-          <p className="mt-4 text-[13px] sm:text-[13px] md:text-4xl lg:text-lg xl:text-lg text-[#939292]">
+          <p className="mt-4 text-[13px] sm:text-[13px] md:text-4xl lg:text-lg xl:text-lg text-[#939292] transition-colors duration-500 dark:text-slate-300">
             Overwhelmed by the gift of salvation we have found in Jesus, we have a heart for authentic worship, <br className='hidden md:block' /> are passionate about the local church, and are on mission to see God’s kingdom established across <br className='hidden md:block' /> the earth.
           </p>
         </Reveal>
 
         <Reveal delay={300}>
-          <h1 className="home-h1 mt-20 ml-10 text-sm md:text-base font-bold text-[#2563EE]">
+          <h1 className="home-h1 mt-20 ml-10 text-sm md:text-base font-bold text-[#2563EE] transition-colors duration-500 dark:text-blue-400">
             Get involved in our daily meetings
           </h1 >
         </Reveal>
@@ -326,16 +388,16 @@ function Home() {
 
 
       <section className="mt-12 md:mt-16 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-13 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
-  {/* Text comes first in the code, so it always sits above the image on mobile */}
+  {/* Text content (comes first in the code, images come second) */}
   <div className="w-full min-w-0 md:flex-1">
     <Reveal>
-      <h2 className="home-h2 text-[22px] md:text-base font-bold text-[#282828] text-center md:text-start ">
+      <h2 className="home-h2 text-[22px] md:text-base font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-white">
         Equipping Meeting
       </h2>
     </Reveal>
 
     <Reveal delay={150}>
-      <p className="home-p mt-2 text-sm md:text-lg text-[#6b6b6b] text-center md:text-start">
+      <p className="home-p mt-2 text-sm md:text-lg text-[#6b6b6b] text-center md:text-start transition-colors duration-500 dark:text-slate-300">
         Join us for our Equipping Meetings, where we provide practical teachings and resources to help you grow in your faith and live out your calling.
           <br /><br />
         It comes on the <b>1st day of the week</b>, that's <b>every Sunday, at 02:00 PM.</b> We encourage you to come and be equipped for the journey ahead.
@@ -395,13 +457,13 @@ function Home() {
 
       <div className="w-full min-w-0 md:flex-1 order-1 md:order-2">
         <Reveal delay={150}>
-          <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start">
+          <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-white">
             Cell Meeting
           </h2>
         </Reveal>
 
         <Reveal delay={300}>
-          <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-center md:text-start">
+          <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-center md:text-start transition-colors duration-500 dark:text-slate-300">
             <b>Don't miss</b> Cell meeting! <br />
             It's a day of intentional gathering and fellowship together as we meet.
             Join us for our Cell Meetings, where we gather in small groups to study the Bible, pray, and support one another in our faith journey.
@@ -421,13 +483,13 @@ function Home() {
  <section className="mt-32 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-10 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
   <div className="w-full min-w-0 md:flex-1">
     <Reveal>
-      <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start ">
+      <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-white">
         Bible Study Meeting
       </h2>
     </Reveal>
 
     <Reveal delay={150}>
-      <p className="home-p mt-2 text-sm md:text-lg text-[#6b6b6b] text-center md:text-start">
+      <p className="home-p mt-2 text-sm md:text-lg text-[#6b6b6b] text-center md:text-start transition-colors duration-500 dark:text-slate-300">
         Join us for our Bible Study Meetings, where we dive deep into the Word of God and explore its relevance to our daily lives.
         It comes on every <b>5th day of the week</b>, that's <b>every Thursday, at 04:00 PM.</b>
 
@@ -487,13 +549,13 @@ function Home() {
 
       <div className="w-full min-w-0 md:flex-1 order-1 md:order-2">
         <Reveal delay={150}>
-          <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start">
+          <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-white">
             School Of Prayer And The Supernatural (SOPS)
           </h2>
         </Reveal>
 
         <Reveal delay={300}>
-          <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-start md:text-start">
+          <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-start md:text-start transition-colors duration-500 dark:text-slate-300">
             Dear beloved,
             Do you desire to enlarge your prayer capacity or have burdens on your heart? Come as we are taught the practice of prayer and the supernatural in SOPS meeting.
 

@@ -1,31 +1,43 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@custom-variant dark (&:where(.dark, .dark *));
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap'); */
 
 
-.menu{
+   :root {
+     --font-sans: 'Montserrat', system-ui, sans-serif;
+     --font-serif: 'Instrument Serif', Georgia, serif;
+   }
+   .font-brand-sans { font-family: var(--font-sans); }
+   .font-brand-serif { font-family: var(--font-serif); }
+   html { background: #fff; }
+   html.dark { background: #05070f; }
+
+
+  .home-h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+
+.home-h2 {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+} 
+
+
+/* .menu{
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-/* .hero-h1 {
-  font-family: 'Poppins', sans-serif;
 } */
 
-.hero-h1 {
+/* .hero-h1 {
+  font-family: 'Poppins', sans-serif;j
+} */
+
+ /* .hero-h1 {
   font-family: "Isometra", serif;
   font-weight: 400;
   font-style: normal;
-}
-
-.home-h1 {
-  font-family: 'Inter', sans-serif;
-  /* font-size: 20px; */
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.home-h2 {
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
+} */

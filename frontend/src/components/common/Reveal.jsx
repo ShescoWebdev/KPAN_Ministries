@@ -27,7 +27,6 @@ export default function Reveal({
     const el = ref.current
     if (!el) return
 
-    // Respect "reduce motion" settings, and browsers without IntersectionObserver
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion || !('IntersectionObserver' in window)) {
       setVisible(true)
@@ -38,7 +37,7 @@ export default function Reveal({
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true)
-          observer.disconnect() // animate once, then stop watching
+          observer.disconnect()
         }
       },
       { threshold: 0.15, rootMargin: '0px 0px -8% 0px' }

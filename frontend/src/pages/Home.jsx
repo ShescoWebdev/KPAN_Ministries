@@ -9,15 +9,147 @@ const heroVideos = [
   'https://res.cloudinary.com/detg3ravj/video/upload/v1791106529/Vid_5_fdzbu3.mp4',
 ]
 
+// How long the slide takes to land (or spring back) after you lift your finger
+const SETTLE_MS = 500
+
+// The finger-follow slide is for phones only: below Tailwind's md breakpoint, where the arrows are hidden
+const isMobileView = () => window.matchMedia('(max-width: 767px)').matches
+
 function Home() {
   const [current, setCurrent] = useState(0)
   const videoRefs = useRef([])
   const total = heroVideos.length
 
+  // Swipe-follow state: the clip tracks your finger, then settles or springs back
+  const [dragX, setDragX] = useState(0)
+  const [dragDir, setDragDir] = useState(1) // 1 = heading to the next clip, -1 = the previous one
+  const [phase, setPhase] = useState('idle') // 'idle' | 'dragging' | 'settling'
+  const [instant, setInstant] = useState(false) // skips transitions for one beat during the handoff
+  const touchRef = useRef({
+    startX: 0,
+    startY: 0,
+    startTime: 0,
+    width: 0,
+    dx: 0,
+    dir: 1,
+    locked: 'ignore',
+    mobile: false,
+  })
+  const settleTimer = useRef(null)
+  const instantTimer = useRef(null)
+
   const goTo = (index) => {
     if (!total) return
     setCurrent((index + total) % total)
   }
+
+  // Hands control back to normal mode once the slide animation has finished
+  const finishSwipe = (commit, dir) => {
+    setInstant(true)
+    setPhase('idle')
+    setDragX(0)
+    if (commit) {
+      goTo(current + dir)
+    } else if (total > 1 && videoRefs.current[current]?.ended) {
+      // The clip finished while the finger was down, so move on now
+      goTo(current + 1)
+    }
+    instantTimer.current = setTimeout(() => setInstant(false), 80)
+  }
+
+  // Animates to the next/previous clip (commit) or back to where it started (cancel)
+  const settle = (commit) => {
+    const { width, dir } = touchRef.current
+    touchRef.current.locked = 'ignore'
+    setPhase('settling')
+    setDragX(commit ? -dir * width : 0)
+    settleTimer.current = setTimeout(() => finishSwipe(commit, dir), SETTLE_MS)
+  }
+
+  const handleTouchStart = (e) => {
+    if (e.touches.length !== 1) {
+      // A second finger (pinch) cancels any drag in progress
+      if (touchRef.current.locked === 'x') settle(false)
+      touchRef.current.locked = 'ignore'
+      return
+    }
+    if (total <= 1 || phase === 'settling') {
+      touchRef.current.locked = 'ignore'
+      return
+    }
+    const t = e.touches[0]
+    touchRef.current = {
+      startX: t.clientX,
+      startY: t.clientY,
+      startTime: Date.now(),
+      width: e.currentTarget.offsetWidth,
+      dx: 0,
+      dir: 1,
+      locked: null,
+      mobile: isMobileView(),
+    }
+  }
+
+  const handleTouchMove = (e) => {
+    const touch = touchRef.current
+    // Larger screens skip the drag entirely and keep the original swipe behaviour
+    if (!touch.mobile || touch.locked === 'ignore' || touch.locked === 'y' || e.touches.length !== 1) return
+    const dx = e.touches[0].clientX - touch.startX
+    const dy = e.touches[0].clientY - touch.startY
+
+    // Decide once whether this gesture is a horizontal swipe or a vertical page scroll
+    if (touch.locked === null) {
+      if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return
+      touch.locked = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y'
+      if (touch.locked === 'y') return
+      setPhase('dragging')
+    }
+
+    touch.dx = Math.max(-touch.width, Math.min(touch.width, dx))
+    touch.dir = touch.dx < 0 ? 1 : -1
+    setDragDir(touch.dir)
+    setDragX(touch.dx)
+  }
+
+  const handleTouchEnd = (e) => {
+    const touch = touchRef.current
+    if (touch.locked === 'ignore') return
+
+    // Larger screens: the original behaviour, a quick swipe changes the clip with the soft crossfade
+    if (!touch.mobile) {
+      const diffX = e.changedTouches[0].clientX - touch.startX
+      const diffY = e.changedTouches[0].clientY - touch.startY
+      touch.locked = 'ignore'
+      // Only count mostly-horizontal swipes of 50px or more
+      if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+        goTo(diffX < 0 ? current + 1 : current - 1)
+      }
+      return
+    }
+
+    if (touch.locked !== 'x') {
+      touch.locked = 'ignore'
+      return
+    }
+    const velocity = Math.abs(touch.dx) / Math.max(1, Date.now() - touch.startTime)
+    // Commit on a long enough drag (50px+ and a quarter of the screen) or a quick flick
+    const isSwipe =
+      Math.abs(touch.dx) >= 50 && (Math.abs(touch.dx) > touch.width * 0.25 || velocity > 0.4)
+    settle(isSwipe)
+  }
+
+  const handleTouchCancel = () => {
+    if (touchRef.current.locked === 'x') settle(false)
+    else touchRef.current.locked = 'ignore'
+  }
+
+  useEffect(
+    () => () => {
+      clearTimeout(settleTimer.current)
+      clearTimeout(instantTimer.current)
+    },
+    []
+  )
 
   //To Play only the active video
   useEffect(() => {
@@ -39,49 +171,64 @@ function Home() {
       <section
         aria-label="Hero"
         className="relative mt-[5rem] md:mt-[5.5rem] h-[calc(100svh-5.5rem)] min-h-[26rem] w-full overflow-hidden bg-black touch-pan-y touch-pinch-zoom"
-        onTouchStart={(e) => {
-          const section = e.currentTarget
-          if (e.touches.length !== 1) {
-            delete section.dataset.startX
-            return
-          }
-          section.dataset.startX = e.touches[0].clientX
-          section.dataset.startY = e.touches[0].clientY
-        }}
-        onTouchEnd={(e) => {
-          const section = e.currentTarget
-          if (section.dataset.startX === undefined) return
-          const diffX = e.changedTouches[0].clientX - Number(section.dataset.startX)
-          const diffY = e.changedTouches[0].clientY - Number(section.dataset.startY)
-          delete section.dataset.startX
-          // Only count mostly-horizontal swipes of 50px or more
-          if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
-            goTo(diffX < 0 ? current + 1 : current - 1)
-          }
-        }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchCancel}
       >
         {/* Video carousel */}
-        {heroVideos.map((src, i) => (
-          <video
-            key={`${src}-${i}`}
-            ref={(el) => {
-              videoRefs.current[i] = el
-            }}
-            src={src}
-            muted
-            playsInline
-            loop={total === 1}
-            preload={i === current || i === (current + 1) % total ? 'auto' : 'metadata'}
-            onEnded={() => goTo(current + 1)}
-            onError={() => {
-              if (i === current && total > 1) goTo(current + 1)
-            }}
-            aria-hidden="true"
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out ${
-              i === current ? 'opacity-100' : 'opacity-0'
-            }`}
-          />
-        ))}
+        {heroVideos.map((src, i) => {
+          const isCurrent = i === current
+          const neighbor = dragDir === 1 ? (current + 1) % total : (current - 1 + total) % total
+          const isNeighbor = phase !== 'idle' && !isCurrent && i === neighbor
+
+          let transform = 'none'
+          if (phase !== 'idle') {
+            if (isCurrent) transform = `translate3d(${dragX}px, 0, 0)`
+            else if (isNeighbor) transform = `translate3d(calc(${dragDir * 100}% + ${dragX}px), 0, 0)`
+          }
+
+          const transition =
+            phase === 'dragging'
+              ? 'none'
+              : phase === 'settling'
+                ? `transform ${SETTLE_MS}ms cubic-bezier(0.22, 1, 0.36, 1)`
+                : instant
+                  ? 'none'
+                  : 'opacity 1000ms ease-in-out'
+
+          return (
+            <video
+              key={`${src}-${i}`}
+              ref={(el) => {
+                videoRefs.current[i] = el
+              }}
+              src={src}
+              muted
+              playsInline
+              loop={total === 1}
+              preload={
+                i === current || i === (current + 1) % total || i === (current - 1 + total) % total
+                  ? 'auto'
+                  : 'metadata'
+              }
+              onEnded={() => {
+                if (phase === 'idle') goTo(current + 1)
+              }}
+              onError={() => {
+                if (i === current && total > 1) goTo(current + 1)
+              }}
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{
+                transform,
+                transition,
+                opacity: isCurrent || isNeighbor ? 1 : 0,
+                willChange: phase !== 'idle' ? 'transform' : 'auto',
+              }}
+            />
+          )
+        })}
 
         {/* Dim overlay for text visibility */}
         <div className="absolute inset-0 bg-black/30" />

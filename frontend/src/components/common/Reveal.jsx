@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 const hiddenClass = {
-  'expand-slide': 'opacity-0 scale-50 translate-x-16',
+  'expand-slide': 'opacity-0 scale-50 translate-x-24',
   expand: 'opacity-0 scale-50',
   'slide-down': 'opacity-0 -translate-y-10',
 }
@@ -52,7 +52,7 @@ export default function Reveal({
     <div
       ref={ref}
       style={{ transitionDelay: visible ? `${delay}ms` : '0ms' }}
-      className={`${origin} transition-[opacity,transform,scale,translate] duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+      className={`${origin} transition-[opacity,transform,scale,translate] duration-[1800ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${
         visible ? shownClass[type] : hiddenClass[type]
       } ${className}`}
     >

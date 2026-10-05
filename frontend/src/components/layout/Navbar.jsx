@@ -118,6 +118,7 @@ export default function Navbar() {
   const [depth, setDepth] = useState(0)
   const [menuHeight, setMenuHeight] = useState('auto')
   const panelRefs = useRef([])
+  const viewportRef = useRef(null)
 
   const closeDesktop = () => setDesktopMenu((prev) => ({ ...prev, open: false }))
 
@@ -172,6 +173,36 @@ export default function Navbar() {
     }, 500)
     return () => clearTimeout(timer)
   }, [isOpen])
+
+  // To stop the page behind from scrolling while the mobile menu is open
+  useEffect(() => {
+    if (!isOpen) return
+    const html = document.documentElement
+    const body = document.body
+    const previousHtmlOverflow = html.style.overflow
+    const previousBodyOverflow = body.style.overflow
+    html.style.overflow = 'hidden'
+    body.style.overflow = 'hidden'
+    return () => {
+      html.style.overflow = previousHtmlOverflow
+      body.style.overflow = previousBodyOverflow
+    }
+  }, [isOpen])
+
+  // To close the mobile menu if the screen grows to desktop size, so the page can never stay locked
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)')
+    const handleChange = (e) => {
+      if (e.matches) setIsOpen(false)
+    }
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
+  }, [])
+
+  // To start every menu panel scrolled to the top
+  useEffect(() => {
+    if (viewportRef.current) viewportRef.current.scrollTop = 0
+  }, [depth])
 
   //To Keep the mobile menu's height matched to the panel currently in view
   useEffect(() => {
@@ -330,7 +361,8 @@ export default function Navbar() {
             <div className="overflow-hidden">
               <div className="bg-white border-t border-gray-300">
                 <div 
-                  className="overflow-hidden transition-[height] duration-500 ease-in-out"
+                  ref={viewportRef}
+                  className="overflow-x-hidden overflow-y-auto overscroll-contain max-h-[calc(100dvh-5.5rem)] md:max-h-[calc(100dvh-6.5rem)] transition-[height] duration-500 ease-in-out"
                   style={{ height: menuHeight }}
                 >
                   <div

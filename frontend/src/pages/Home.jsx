@@ -38,7 +38,27 @@ function Home() {
     <div>
       <section
         aria-label="Hero"
-        className="relative mt-[5rem] md:mt-[5.5rem] h-[calc(100svh-5.5rem)] min-h-[26rem] w-full overflow-hidden bg-black"
+        className="relative mt-[5rem] md:mt-[5.5rem] h-[calc(100svh-5.5rem)] min-h-[26rem] w-full overflow-hidden bg-black touch-pan-y touch-pinch-zoom"
+        onTouchStart={(e) => {
+          const section = e.currentTarget
+          if (e.touches.length !== 1) {
+            delete section.dataset.startX
+            return
+          }
+          section.dataset.startX = e.touches[0].clientX
+          section.dataset.startY = e.touches[0].clientY
+        }}
+        onTouchEnd={(e) => {
+          const section = e.currentTarget
+          if (section.dataset.startX === undefined) return
+          const diffX = e.changedTouches[0].clientX - Number(section.dataset.startX)
+          const diffY = e.changedTouches[0].clientY - Number(section.dataset.startY)
+          delete section.dataset.startX
+          // Only count mostly-horizontal swipes of 50px or more
+          if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+            goTo(diffX < 0 ? current + 1 : current - 1)
+          }
+        }}
       >
         {/* Video carousel */}
         {heroVideos.map((src, i) => (

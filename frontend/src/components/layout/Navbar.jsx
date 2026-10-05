@@ -268,7 +268,7 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-2">
           <div className="flex items-center justify-between h-16">
-            <NavLink to="/" className="shrink-0">
+            <NavLink to="/" onClick={() => setIsOpen(false)} className="shrink-0">
               <div className="flex items-center space-x-[-1.2rem] md:space-x-[-3rem]">
                 <img
                   className="

@@ -258,7 +258,7 @@ function Home() {
               xl:h-20
               w-auto"
               src="/kpan logo white.png"
-              alt="Church Logo"
+              alt="KPAN Logo"
                   />
           </Reveal>
         </div>

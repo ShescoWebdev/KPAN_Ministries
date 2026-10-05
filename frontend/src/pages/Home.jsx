@@ -5,9 +5,9 @@ import Reveal from '../components/common/Reveal'
 
 // Hero videos
 const heroVideos = [
+  'https://res.cloudinary.com/detg3ravj/video/upload/v1791241911/Vid_8_reanwp.mp4',
   'https://res.cloudinary.com/detg3ravj/video/upload/v1791241769/Vid_10_zhzwgb.mp4',
   'https://res.cloudinary.com/detg3ravj/video/upload/v1791241759/Vid_9_dblahi.mp4',
-  'https://res.cloudinary.com/detg3ravj/video/upload/v1791241911/Vid_8_reanwp.mp4',
   'https://res.cloudinary.com/detg3ravj/video/upload/v1791106534/Vid_4_shgqrz.mp4',
   'https://res.cloudinary.com/detg3ravj/video/upload/v1791106529/Vid_5_fdzbu3.mp4',
 ]

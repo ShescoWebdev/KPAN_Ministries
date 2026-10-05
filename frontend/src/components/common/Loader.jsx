@@ -78,7 +78,7 @@ export default function Loader() {
 
       <div className="h-36 w-36 animate-spin rounded-full sm:h-44 sm:w-44" style={ringStyle} />
 
-      <p className="font-brand-sans mt-8 text-lg text-[#1c2333] dark:text-white">Loading...</p>
+      <p className="font-brand-sans mt-8 font-medium italic text-lg text-[#9c813c] dark:text-white">Loading...</p>
     </div>
   )
 }

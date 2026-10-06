@@ -400,7 +400,7 @@ function Home() {
   {/* Text content (comes first in the code, images come second) */}
   <div className="w-full min-w-0 md:flex-1">
     <Reveal>
-      <h2 className="home-h2 text-[22px] md:text-base font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4  border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2">
+      <h2 className="home-h2 text-[17px] md:text-base font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4  border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2 w-fit md:w-full">
         Equipping Meeting
       </h2>
     </Reveal>
@@ -468,7 +468,7 @@ function Home() {
 
       <div className="w-full min-w-0 md:flex-1 order-1 md:order-2">
         <Reveal delay={150}>
-          <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4  border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2">
+          <h2 className="home-h2 text-[17px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4  border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2 w-fit md:w-full">
             Cell Meeting
           </h2>
         </Reveal>
@@ -495,7 +495,7 @@ function Home() {
  <section className="mt-32 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-10 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5 bg-white dark:bg-black p-10 rounded-4xl">
   <div className="w-full min-w-0 md:flex-1">
     <Reveal>
-      <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4  border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2">
+      <h2 className="home-h2 text-[17px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4  border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2 w-fit md:w-full">
         Bible Study Meeting
       </h2>
     </Reveal>
@@ -562,7 +562,7 @@ function Home() {
 
       <div className="w-full min-w-0 md:flex-1 order-1 md:order-2">
         <Reveal delay={150}>
-          <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4  border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2">
+          <h2 className="home-h2 text-[17px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4 border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2  w-fit md:w-full">
             School Of Prayer And The Supernatural (SOPS)
           </h2>
         </Reveal>

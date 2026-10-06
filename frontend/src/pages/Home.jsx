@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowUpRight, ChevronDown, ChevronLeft, ChevronRight, MapPin } from 'lucide-react'
 import Reveal from '../components/common/Reveal'
 
 // Hero videos
@@ -17,6 +17,270 @@ const SETTLE_MS = 500
 
 // Mobile mode for carousel slide
 const isMobileView = () => window.matchMedia('(max-width: 767px)').matches
+
+// Live stream link
+const LIVE_URL = 'https://youtube.com/@apstjoshuaokorie_kpan?si=MFTECfFDLTPz961h'
+
+// Shared small label style
+const labelClass =
+  'font-brand-sans text-[11px] font-medium uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400 sm:text-xs'
+
+// Faint word sizes
+const INITIALS_SIZE = 'text-[length:clamp(8rem,28vw,24rem)]'
+const NAME_SIZE = 'text-[length:18vw] md:text-[length:clamp(5rem,11vw,11rem)]'
+
+// Italic orange heading word
+function Accent({ children }) {
+  return <em className="italic text-[#ff6a00]">{children}</em>
+}
+
+// Orange line and label
+function Eyebrow({ children }) {
+  return (
+    <div className="flex items-center gap-4">
+      <span className="h-px w-10 bg-[#ff6a00] sm:w-14" />
+      <span className="font-brand-sans text-[11px] font-semibold uppercase tracking-[0.3em] text-[#ff6a00] sm:text-xs">
+        {children}
+      </span>
+    </div>
+  )
+}
+
+// Giant faint backdrop word
+function Faint({ words, size, italic = false }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`font-brand-serif pointer-events-none -mb-[0.3em] block select-none leading-[0.8] text-[#ff6a00]/[0.07] dark:text-[#ff6a00]/[0.09] ${size} ${
+        italic ? 'italic' : ''
+      }`}
+    >
+      {words.map((word, i) => (
+        <span key={word} className="block md:inline">
+          {word}
+          {i < words.length - 1 ? ' ' : ''}
+        </span>
+      ))}
+    </span>
+  )
+}
+
+// Day, time and venue card
+function InfoCard({ card, line }) {
+  return (
+    <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition-colors duration-500 dark:border-white/10 dark:bg-[#05070f] sm:p-10">
+      <div className="flex items-center gap-4">
+        <span className={`h-px w-12 ${line}`} />
+        <span className={labelClass}>{card.day}</span>
+      </div>
+
+      <p className={`${labelClass} mt-8`}>{card.label}</p>
+      <h3 className="font-brand-serif mt-2 text-4xl italic leading-tight text-[#1c2333] dark:text-white sm:text-5xl">
+        {card.name}
+      </h3>
+
+      <p className="font-brand-sans mt-6 flex items-start gap-3 text-[15px] leading-relaxed text-slate-600 dark:text-slate-300 sm:text-base">
+        <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[#ff6a00]" />
+        <span>{card.venue}</span>
+      </p>
+
+      <div className="my-8 border-t border-slate-200 dark:border-white/10" />
+
+      <p className={labelClass}>Service times</p>
+      <p className="font-brand-serif mt-3 text-4xl text-[#1c2333] dark:text-white sm:text-5xl">{card.time}</p>
+      <p className="font-brand-sans mt-2 text-xs font-medium uppercase tracking-[0.2em] text-[#ff6a00]">
+        {card.note}
+      </p>
+
+      {card.extra && (
+        <div className="mt-8">
+          <p className={labelClass}>{card.extra.label}</p>
+          <p className="font-brand-sans mt-2 text-[15px] leading-relaxed text-slate-600 dark:text-slate-300 sm:text-base">
+            {card.extra.text}
+          </p>
+        </div>
+      )}
+
+      <Link
+        to="/location"
+        className="font-brand-sans mt-8 inline-flex items-center gap-2 border-b border-slate-400 pb-1 text-[15px] text-[#1c2333] transition-colors duration-300 hover:border-[#ff6a00] hover:text-[#ff6a00] dark:border-slate-500 dark:text-white sm:text-base"
+      >
+        Plan your visit
+        <ArrowUpRight className="h-4 w-4" />
+      </Link>
+    </div>
+  )
+}
+
+// Weekly chapters data
+const chapters = [
+  {
+    tag: 'Equip',
+    faint: ['Equipping', 'Meeting'],
+    faintSize: NAME_SIZE,
+    faintItalic: true,
+    title: (
+      <>
+        Be <Accent>equipped</Accent> for the journey ahead.
+      </>
+    ),
+    intro:
+      'Practical teaching and resources to help you grow in your faith and live out your calling. Come, be equipped, and step into all God has for you.',
+    line: 'bg-[#ff6a00]',
+    card: {
+      day: 'Sunday',
+      label: 'KPAN',
+      name: 'Equipping Meeting',
+      venue: 'NAAT Multi-Purpose Hall, behind June 12 FACOOP Supermarket, UNIBEN',
+      time: '2:00 PM',
+      note: 'Every Sunday · 1st day of the week',
+      extra: {
+        label: 'Bring along',
+        text: 'Your Bible, notebook, and pen. We look forward to seeing you there!',
+      },
+    },
+    image: '/Equipping Meeting.jpeg',
+    alt: 'Equipping Meeting',
+    imageFirst: false,
+  },
+  {
+    tag: 'Connect',
+    faint: ['Cell', 'Meeting'],
+    faintSize: NAME_SIZE,
+    faintItalic: true,
+    title: (
+      <>
+        Closer to one another, closer to the <Accent>Lord</Accent>.
+      </>
+    ),
+    intro:
+      'A day of intentional gathering and fellowship. We meet in small groups to study the Bible, pray, and support one another in our faith journey.',
+    line: 'bg-[#4f46a5] dark:bg-[#8b7cf6]',
+    card: {
+      day: 'Monday',
+      label: 'KPAN',
+      name: 'Cell Meeting',
+      venue: 'Join in a cell centre closest to you',
+      time: '5:00 PM',
+      note: 'Every Monday · 2nd day of the week',
+      extra: {
+        label: 'Don’t miss it',
+        text: 'These meetings are designed to bring us closer to one another as we grow in fellowship with the Lord. Come and be part of this vibrant community of believers.',
+      },
+    },
+    image: '/Cell Meeting.jpeg',
+    alt: 'Cell Meeting',
+    imageFirst: true,
+  },
+  {
+    tag: 'Study',
+    faint: ['BSM'],
+    faintSize: INITIALS_SIZE,
+    faintItalic: false,
+    title: (
+      <>
+        Dive deep into the <Accent>Word</Accent> of God.
+      </>
+    ),
+    intro:
+      'Explore the Word of God and discover its relevance to your daily life, one passage at a time.',
+    line: 'bg-[#14b8a6]',
+    card: {
+      day: 'Thursday',
+      label: 'KPAN',
+      name: 'Bible Study Meeting',
+      venue: 'NAAT Multi-Purpose Hall, behind June 12 FACOOP Supermarket, UNIBEN',
+      time: '4:00 PM',
+      note: 'Every Thursday · 5th day of the week',
+      extra: {
+        label: 'Come ready',
+        text: 'Let’s come together to study the Bible, ask questions, and grow in our understanding of God’s Word. We look forward to seeing you there!',
+      },
+    },
+    image: '/SOTK.jpeg',
+    alt: 'Bible Study Meeting',
+    imageFirst: false,
+  },
+  {
+    tag: 'Pray',
+    faint: ['SOPS'],
+    faintSize: INITIALS_SIZE,
+    faintItalic: false,
+    title: (
+      <>
+        Enlarge your <Accent>prayer</Accent> capacity.
+      </>
+    ),
+    intro:
+      'Dear beloved, do you desire to enlarge your prayer capacity or carry burdens on your heart? Come as we are taught the practice of prayer and the supernatural.',
+    line: 'bg-[#ff6a00]',
+    card: {
+      day: 'Saturday',
+      label: 'School of Prayer & the Supernatural',
+      name: 'SOPS',
+      venue: 'NAAT Multi-Purpose Hall, UNIBEN',
+      time: '4:00 PM',
+      note: 'Every Saturday · 7th day of the week',
+      extra: {
+        label: 'Come expectant',
+        text: 'Bring your burdens and your hunger for more of God.',
+      },
+    },
+    image: '/SOPS.jpeg',
+    alt: 'SOPS',
+    imageFirst: true,
+  },
+]
+
+// One weekly chapter
+function Chapter({ chapter, index }) {
+  const number = String(index + 1).padStart(2, '0')
+
+  return (
+    <section className="relative overflow-hidden pt-16 md:pt-24">
+      <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10">
+        <Faint words={chapter.faint} size={chapter.faintSize} italic={chapter.faintItalic} />
+
+        <div className="relative">
+          <Reveal origin="origin-left">
+            <Eyebrow>
+              Chapter {number} — {chapter.tag}
+            </Eyebrow>
+          </Reveal>
+
+          <div className="mt-6 grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-16">
+            <Reveal origin="origin-left" delay={100}>
+              <h2 className="font-brand-serif text-4xl leading-[1.05] tracking-tight text-[#1c2333] transition-colors duration-500 dark:text-white sm:text-5xl lg:text-6xl">
+                {chapter.title}
+              </h2>
+            </Reveal>
+
+            <Reveal delay={200}>
+              <p className="font-brand-sans max-w-xl text-base leading-relaxed text-slate-600 transition-colors duration-500 dark:text-slate-300 sm:text-lg">
+                {chapter.intro}
+              </p>
+            </Reveal>
+          </div>
+
+          <div className="mt-12 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+            <Reveal delay={150}>
+              <InfoCard card={chapter.card} line={chapter.line} />
+            </Reveal>
+
+            <Reveal delay={300} className={chapter.imageFirst ? 'lg:order-first' : ''}>
+              <img
+                className="mx-auto block h-auto max-h-[25rem] w-auto max-w-full rounded-2xl shadow-xl shadow-black/10 dark:shadow-black/40 sm:max-h-[30rem] md:max-h-[34rem] lg:max-h-[38rem]"
+                src={chapter.image}
+                alt={chapter.alt}
+                loading="lazy"
+              />
+            </Reveal>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
 
 function Home() {
   const [current, setCurrent] = useState(0)
@@ -169,7 +433,7 @@ function Home() {
   }, [current])
 
   return (
-    <div className='bg-[#F8F7F5] dark:bg-[#101828]'>
+    <div className="bg-[#F8F7F5] transition-colors duration-500 dark:bg-[#101828]">
 
       <Reveal>
       <section
@@ -371,217 +635,77 @@ function Home() {
       </section>
       </Reveal>
 
+      {/* Intro */}
+      <section className="relative overflow-hidden pt-20 md:pt-28">
+        <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10">
+          <Faint words={['TFC']} size={INITIALS_SIZE} />
 
-      <Reveal>      
-      <section className=" px-4 text-center p-10 rounded-4xl shadow-md sm:px-6 lg:px-8 m-10 flex flex-col items-center justify-center bg-white dark:bg-black">
-        <Reveal>
-          <h2 className="text-xl sm:text-[22px] md:text-3xl lg:text-3xl xl:text-3xl font-bold text-[#999898] transition-colors duration-500 dark:text-white">The Fullness Church is a church that believes in Jesus, a  <br className='hidden md:block' /> church that loves God and people.</h2>
-        </Reveal>
+          <div className="relative">
+            <Reveal origin="origin-left">
+              <Eyebrow>Who we are</Eyebrow>
+            </Reveal>
 
-        <Reveal delay={150}>
-          <p className="mt-4 text-[13px] sm:text-[13px] md:text-4xl lg:text-lg xl:text-lg text-[#939292] transition-colors duration-500 dark:text-slate-300">
-            Overwhelmed by the gift of salvation we have found in Jesus, we have a heart for authentic worship, <br className='hidden md:block' /> are passionate about the local church, and are on mission to see God’s kingdom established across <br className='hidden md:block' /> the earth.
-          </p>
-        </Reveal>
+            <div className="mt-6 grid gap-8 lg:grid-cols-2 lg:items-end lg:gap-16">
+              <Reveal origin="origin-left" delay={100}>
+                <h2 className="font-brand-serif text-3xl leading-[1.1] tracking-tight text-[#1c2333] transition-colors duration-500 dark:text-white sm:text-4xl xl:text-5xl">
+                  The Fullness Church is a church that believes in <Accent>Jesus</Accent>, a church that
+                  loves God and people.
+                </h2>
+              </Reveal>
 
-        <div className='border-b w-56 mt-14 border-gray-300 dark:border-[#AD8968]'></div>
+              <Reveal delay={200}>
+                <p className="font-brand-sans max-w-xl text-base leading-relaxed text-slate-600 transition-colors duration-500 dark:text-slate-300 sm:text-lg">
+                  Overwhelmed by the gift of salvation we have found in Jesus, we have a heart for
+                  authentic worship, are passionate about the local church, and are on mission to see
+                  God’s kingdom established across the earth.
+                </p>
 
-        <Reveal delay={300}>
-          <h1 className="home-h1 mt-5 text-sm md:text-base text-center m-auto font-bold text-[#2563EE] transition-colors duration-500 dark:text-blue-400">
-            Get involved in our daily meetings
-          </h1 >
-        </Reveal>
+                <div className="mt-8 flex items-center gap-4">
+                  <span className="h-px min-w-6 flex-1 bg-slate-300 dark:bg-white/15" />
+                  <span className={`${labelClass} text-center`}>Get involved in our daily meetings</span>
+                  <span className="h-px min-w-6 flex-1 bg-slate-300 dark:bg-white/15" />
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
       </section>
-      </Reveal>      
 
+      {/* Weekly chapters */}
+      {chapters.map((chapter, i) => (
+        <Chapter key={chapter.tag} chapter={chapter} index={i} />
+      ))}
 
-      <Reveal>      
-      <section className="mt-12 md:mt-16 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-13 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5 bg-white dark:bg-black p-10 rounded-4xl">
-  {/* Text content (comes first in the code, images come second) */}
-  <div className="w-full min-w-0 md:flex-1">
-    <Reveal>
-      <h2 className="home-h2 text-[17px] md:text-base font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4  border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2 w-fit md:w-full">
-        Equipping Meeting
-      </h2>
-    </Reveal>
+      {/* Watch live band */}
+      <section className="pb-24 pt-20 md:pb-32 md:pt-28">
+        <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10">
+          <div className="border-t border-slate-200 pt-10 dark:border-white/10">
+            <Reveal>
+              <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+                <p className="font-brand-sans flex items-start gap-4 text-lg text-slate-600 dark:text-slate-300 sm:items-center sm:text-xl">
+                  <span className="mt-2 h-3 w-3 shrink-0 animate-pulse rounded-full bg-[#ff6a00] sm:mt-0" />
+                  <span>
+                    Can’t make it in person?{' '}
+                    <strong className="font-semibold text-[#1c2333] dark:text-white">
+                      Worship live with us online.
+                    </strong>
+                  </span>
+                </p>
 
-    <Reveal delay={150}>
-      <p className="home-p mt-2 text-sm md:text-lg text-[#6b6b6b] text-center md:text-start transition-colors duration-500 dark:text-slate-300">
-        Join us for our Equipping Meetings, where we provide practical teachings and resources to help you grow in your faith and live out your calling.
-          <br /><br />
-        It comes on the <b>1st day of the week</b>, that's <b>every Sunday, at 02:00 PM.</b> We encourage you to come and be equipped for the journey ahead.
-
-        <br /><br />
-        <b>Venue:</b> NAAT Multi-Purpose Hall, behind June 12 FACOOP Supermarket, UNIBEN.
-
-        <br /><br />
-        Do well to come with your <b>Bible</b>, <b>notebook</b>, and <b>pen</b>. We look forward to seeing you there!
-      </p>
-    </Reveal>
-  </div>
-
-  <div className="w-full min-w-0 md:flex-1">
-    <Reveal delay={300}>
-      <img
-        className="
-        mx-auto
-        block
-        h-auto
-        w-auto
-        max-w-full
-        max-h-[25rem]
-        sm:max-h-[30rem]
-        md:max-h-[39rem]
-        rounded-lg
-        shadow-md
-        "
-        src="/Equipping Meeting.jpeg"
-        alt="Equipping Meeting"
-        loading="lazy"
-      />
-    </Reveal>
-  </div>
-</section>
-</Reveal>
-
- <Reveal>
- <section className="mt-32 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-10 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5 bg-white dark:bg-black p-10 rounded-4xl">
-      <div className="w-full min-w-0 md:flex-1 order-2 md:order-1">
-        <Reveal>
-          <img 
-          className="
-          mx-auto
-          block
-          h-auto
-          w-auto
-          max-w-full
-          max-h-[25rem]
-          sm:max-h-[30rem]
-          md:max-h-[38rem]
-          rounded-lg
-          shadow-md
-          "
-          src="/Cell Meeting.jpeg" 
-          alt="Cell Meeting" />
-        </Reveal>
-      </div>
-
-      <div className="w-full min-w-0 md:flex-1 order-1 md:order-2">
-        <Reveal delay={150}>
-          <h2 className="home-h2 text-[17px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4  border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2 w-fit md:w-full">
-            Cell Meeting
-          </h2>
-        </Reveal>
-
-        <Reveal delay={300}>
-          <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-center md:text-start transition-colors duration-500 dark:text-slate-300">
-            <b>Don't miss</b> Cell meeting! <br />
-            It's a day of intentional gathering and fellowship together as we meet.
-            Join us for our Cell Meetings, where we gather in small groups to study the Bible, pray, and support one another in our faith journey.
-
-            <br /><br />
-            These meetings have been designed to bring us closer with one another even as we grow in fellowship with the Lord.
-            <br /><br />
-
-             It comes up every <b>2nd day of the week</b>, that's <b>every Monday, at 05:00 PM. </b> 
-             <b>Join in a cell centre closest to you</b>. We encourage you to come and be a part of this vibrant community of believers.
-          </p>
-        </Reveal>
-      </div>
- </section>
- </Reveal>
-
-  <Reveal>
- <section className="mt-32 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-10 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5 bg-white dark:bg-black p-10 rounded-4xl">
-  <div className="w-full min-w-0 md:flex-1">
-    <Reveal>
-      <h2 className="home-h2 text-[17px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4  border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2 w-fit md:w-full">
-        Bible Study Meeting
-      </h2>
-    </Reveal>
-
-    <Reveal delay={150}>
-      <p className="home-p mt-2 text-sm md:text-lg text-[#6b6b6b] text-center md:text-start transition-colors duration-500 dark:text-slate-300">
-        Join us for our Bible Study Meetings, where we dive deep into the Word of God and explore its relevance to our daily lives.
-        It comes on every <b>5th day of the week</b>, that's <b>every Thursday, at 04:00 PM.</b>
-
-        <br /><br />
-        <b>Venue:</b> NAAT Multi-Purpose Hall, behind June 12 FACOOP Supermarket, UNIBEN. <br />
-        Let's come together to study the Bible, ask questions, and grow in our understanding of God's Word. We look forward to seeing you there!
-      </p>
-    </Reveal>
-  </div>
-
-  <div className="w-full min-w-0 md:flex-1">
-    <Reveal delay={300}>
-      <img
-        className="
-        mx-auto
-        block
-        h-auto
-        w-auto
-        max-w-full
-        max-h-[25rem]
-        sm:max-h-[30rem]
-        md:max-h-[39rem]
-        rounded-lg
-        shadow-md
-        "
-        src="/SOTK.jpeg"
-        alt="Bible Study Meeting"
-        loading="lazy"
-      />
-    </Reveal>
-  </div>
-</section>
-</Reveal>
-
-
-
-<Reveal>
-<section className="mt-32 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-10 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5 bg-white dark:bg-black p-10 rounded-4xl mb-10">
-      <div className="w-full min-w-0 md:flex-1 order-2 md:order-1">
-        <Reveal>
-          <img 
-          className="
-          mx-auto
-          block
-          h-auto
-          w-auto
-          max-w-full
-          max-h-[25rem]
-          sm:max-h-[30rem]
-          md:max-h-[38rem]
-          rounded-lg
-          shadow-md
-          "
-          src="/SOPS.jpeg" 
-          alt="SOPS" />
-        </Reveal>
-      </div>
-
-      <div className="w-full min-w-0 md:flex-1 order-1 md:order-2">
-        <Reveal delay={150}>
-          <h2 className="home-h2 text-[17px] md:text-lg font-bold text-[#282828] text-start md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4 border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2  w-fit md:w-full">
-            School Of Prayer And The Supernatural (SOPS)
-          </h2>
-        </Reveal>
-
-        <Reveal delay={300}>
-          <p className="home-p mt-2 text-sm md:text-base text-[#6b6b6b] text-start md:text-start transition-colors duration-500 dark:text-slate-300">
-            Dear beloved,
-            Do you desire to enlarge your prayer capacity or have burdens on your heart? Come as we are taught the practice of prayer and the supernatural in SOPS meeting.
-
-            <br /><br />
-            <b>Time:</b> 4pm <br />
-            <b> Venue:</b> NAAT Multi-purpose Hall, UNIBEN.
-            <br />
-            <b>Day:</b> Every 7th day of the week, that's <b>every Saturday.</b>
-          </p>
-        </Reveal>
-      </div>
- </section>
- </Reveal>
+                <a
+                  href={LIVE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-brand-sans inline-flex w-fit items-center gap-2 rounded-full bg-[#0f172a] px-8 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-white transition-colors duration-300 hover:bg-[#ff6a00] dark:bg-[#ff6a00] dark:hover:bg-white dark:hover:text-[#0f172a]"
+                >
+                  Watch live
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }

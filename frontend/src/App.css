@@ -12,6 +12,14 @@
    html { background: #fff; }
    html.dark { background: #05070f; }
 
+   /* body {
+    background-color: #F8F7F5;
+   }
+
+   body.dark {
+    background-color: #101828;
+   } */
+
 
   .home-h1 {
     font-family: 'Inter', sans-serif;

@@ -169,7 +169,9 @@ function Home() {
   }, [current])
 
   return (
-    <div>
+    <div className='bg-[#F8F7F5] dark:bg-[#101828]'>
+
+      <Reveal>
       <section
         ref={heroRef}
         aria-label="Hero"
@@ -279,7 +281,7 @@ function Home() {
             <Reveal origin="origin-left" delay={650}>
               <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-5 sm:mt-10">
                 <Link
-                  to="/online-church"
+                  to="https://youtube.com/@apstjoshuaokorie_kpan?si=MFTECfFDLTPz961h"
                   className="group inline-flex items-center gap-4 rounded-full bg-[#ff6a00] px-7 py-4 text-white transition-colors duration-300 hover:bg-[#ff8a33] sm:px-8 sm:py-5"
                 >
                   <span className="h-2.5 w-2.5 animate-pulse rounded-full bg-white" />
@@ -367,10 +369,11 @@ function Home() {
           </div>
         </div>
       </section>
+      </Reveal>
 
 
-
-      <section className="mt-20 md:mt-32 px-4 text-center">
+      <Reveal>      
+      <section className=" px-4 text-center p-10 rounded-4xl shadow-md sm:px-6 lg:px-8 m-10 flex flex-col items-center justify-center bg-white dark:bg-black">
         <Reveal>
           <h2 className="text-xl sm:text-[22px] md:text-3xl lg:text-3xl xl:text-3xl font-bold text-[#999898] transition-colors duration-500 dark:text-white">The Fullness Church is a church that believes in Jesus, a  <br className='hidden md:block' /> church that loves God and people.</h2>
         </Reveal>
@@ -381,19 +384,23 @@ function Home() {
           </p>
         </Reveal>
 
+        <div className='border-b w-56 mt-14 border-gray-300 dark:border-[#AD8968]'></div>
+
         <Reveal delay={300}>
-          <h1 className="home-h1 mt-20 ml-10 text-sm md:text-base font-bold text-[#2563EE] transition-colors duration-500 dark:text-blue-400">
+          <h1 className="home-h1 mt-5 ml-10 text-sm md:text-base font-bold text-[#2563EE] transition-colors duration-500 dark:text-blue-400">
             Get involved in our daily meetings
           </h1 >
         </Reveal>
       </section>
+      </Reveal>      
 
 
-      <section className="mt-12 md:mt-16 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-13 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
+      <Reveal>      
+      <section className="mt-12 md:mt-16 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-13 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5 bg-white dark:bg-black p-10 rounded-4xl">
   {/* Text content (comes first in the code, images come second) */}
   <div className="w-full min-w-0 md:flex-1">
     <Reveal>
-      <h2 className="home-h2 text-[22px] md:text-base font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-white">
+      <h2 className="home-h2 text-[22px] md:text-base font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4  border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2">
         Equipping Meeting
       </h2>
     </Reveal>
@@ -435,8 +442,10 @@ function Home() {
     </Reveal>
   </div>
 </section>
+</Reveal>
 
- <section className="mt-32 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-10 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
+ <Reveal>
+ <section className="mt-32 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-10 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5 bg-white dark:bg-black p-10 rounded-4xl">
       <div className="w-full min-w-0 md:flex-1 order-2 md:order-1">
         <Reveal>
           <img 
@@ -459,7 +468,7 @@ function Home() {
 
       <div className="w-full min-w-0 md:flex-1 order-1 md:order-2">
         <Reveal delay={150}>
-          <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-white">
+          <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4  border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2">
             Cell Meeting
           </h2>
         </Reveal>
@@ -480,12 +489,13 @@ function Home() {
         </Reveal>
       </div>
  </section>
+ </Reveal>
 
-
- <section className="mt-32 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-10 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
+  <Reveal>
+ <section className="mt-32 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-10 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5 bg-white dark:bg-black p-10 rounded-4xl">
   <div className="w-full min-w-0 md:flex-1">
     <Reveal>
-      <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-white">
+      <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4  border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2">
         Bible Study Meeting
       </h2>
     </Reveal>
@@ -524,11 +534,12 @@ function Home() {
     </Reveal>
   </div>
 </section>
+</Reveal>
 
 
 
-
-<section className="mt-32 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-10 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5">
+<Reveal>
+<section className="mt-32 md:mt-40 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-10 md:gap-8 lg:gap-16 items-center mb-10 shadow-md pb-5 bg-white dark:bg-black p-10 rounded-4xl mb-10">
       <div className="w-full min-w-0 md:flex-1 order-2 md:order-1">
         <Reveal>
           <img 
@@ -551,7 +562,7 @@ function Home() {
 
       <div className="w-full min-w-0 md:flex-1 order-1 md:order-2">
         <Reveal delay={150}>
-          <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-white">
+          <h2 className="home-h2 text-[22px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4  border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2">
             School Of Prayer And The Supernatural (SOPS)
           </h2>
         </Reveal>
@@ -570,6 +581,7 @@ function Home() {
         </Reveal>
       </div>
  </section>
+ </Reveal>
     </div>
   )
 }

@@ -562,7 +562,7 @@ function Home() {
 
       <div className="w-full min-w-0 md:flex-1 order-1 md:order-2">
         <Reveal delay={150}>
-          <h2 className="home-h2 text-[17px] md:text-lg font-bold text-[#282828] text-center md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4 border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2  w-fit md:w-full">
+          <h2 className="home-h2 text-[17px] md:text-lg font-bold text-[#282828] text-start md:text-start transition-colors duration-500 dark:text-[#AD8968] border-b-4 border-[#5c5c5c] dark:border-[#AD8968] mb-7 rounded-2xl p-2  w-fit md:w-full">
             School Of Prayer And The Supernatural (SOPS)
           </h2>
         </Reveal>

@@ -127,7 +127,7 @@ export default function Navbar({ hasHero = false }) {
   // Transparent over the hero at the top
   const solid = scrolled || isOpen || !hasHero
   const textTone = solid ? 'text-[#1c2333] dark:text-white' : 'text-white'
-  const logoSize = solid ? 'h-10 sm:h-12' : 'h-12 sm:h-14 xl:h-16'
+  const logoSize = solid ? 'h-4 sm:h-6' : 'h-6 sm:h-8 xl:h-10'
 
   const closeDesktop = () => setDesktopMenu((prev) => ({ ...prev, open: false }))
 
@@ -178,7 +178,7 @@ export default function Navbar({ hasHero = false }) {
     return () => clearTimeout(timer)
   }, [isOpen])
 
-  // To stop the page behind from scrolling while the mobile menu is open
+  // To stop the page under, from scrolling while the mobile menu is open
   useEffect(() => {
     if (!isOpen) return
     const html = document.documentElement

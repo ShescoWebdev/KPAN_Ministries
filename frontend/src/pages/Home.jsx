@@ -387,7 +387,7 @@ function Home() {
         <div className='border-b w-56 mt-14 border-gray-300 dark:border-[#AD8968]'></div>
 
         <Reveal delay={300}>
-          <h1 className="home-h1 mt-5 ml-10 text-sm md:text-base text-center m-auto font-bold text-[#2563EE] transition-colors duration-500 dark:text-blue-400">
+          <h1 className="home-h1 mt-5 text-sm md:text-base text-center m-auto font-bold text-[#2563EE] transition-colors duration-500 dark:text-blue-400">
             Get involved in our daily meetings
           </h1 >
         </Reveal>

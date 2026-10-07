@@ -139,7 +139,7 @@ const chapters = [
         text: 'Your Bible, notebook, and pen. We look forward to seeing you there!',
       },
     },
-    image: '/Equipping Meeting.jpeg',
+    image: '/Equipping Meeting.jpg',
     alt: 'Equipping Meeting',
     imageFirst: false,
   },
@@ -174,7 +174,7 @@ const chapters = [
   },
   {
     tag: 'Study',
-    faint: ['BSM'],
+    faint: ['BS'],
     faintSize: INITIALS_SIZE,
     faintItalic: false,
     title: (
@@ -197,7 +197,7 @@ const chapters = [
         text: 'Let’s come together to study the Bible, ask questions, and grow in our understanding of God’s Word. We look forward to seeing you there!',
       },
     },
-    image: '/SOTK.jpeg',
+    image: '/Bible Study.jpg',
     alt: 'Bible Study Meeting',
     imageFirst: false,
   },

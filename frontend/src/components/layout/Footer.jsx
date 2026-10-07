@@ -49,6 +49,10 @@ const linkClass =
 const socialCircle =
   'grid h-11 w-11 place-items-center rounded-full border border-white/20 text-white/80 transition-colors duration-300'
 
+  // Faint backdrop name styling
+const backdropName =
+  'font-brand-serif pointer-events-none absolute select-none whitespace-nowrap text-[length:clamp(7rem,22vw,22rem)] italic leading-none text-white/[0.07]'
+
 // Orange line and label
 function ColumnTitle({ children }) {
   return (
@@ -63,16 +67,18 @@ function ColumnTitle({ children }) {
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-[#0b0f1a] text-white transition-colors duration-500 dark:bg-[#05070f]">
-      {/* Faint backdrop name */}
-      <span
-        aria-hidden="true"
-        className="font-brand-serif pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[30%] select-none whitespace-nowrap text-[length:clamp(8rem,28vw,28rem)] italic leading-none text-white/[0.04]"
-      >
+    <footer className="relative overflow-hidden bg-[#0e182e] text-white transition-colors duration-500 dark:bg-[#0b1426]">
+      {/* Bottom Faint backdrop name */}
+      <span aria-hidden="true" className={`${backdropName} md:hidden bottom-0 left-4 translate-y-[30%] sm:left-8`}>
         K-PAN
       </span>
 
-      <div className="relative mx-auto w-full max-w-7xl px-5 pt-16 sm:px-8 md:pt-24 lg:px-10">
+      {/* Top Faint backdrop name */}
+      <span aria-hidden="true" className={`${backdropName} right-4 top-6 sm:right-8 md:left-1/2 md:right-auto md:-translate-x-1/2`}>
+        K-PAN
+      </span>
+
+      <div className="relative mx-auto w-full max-w-7xl px-5 pt-32 sm:px-8 sm:pt-40 md:pt-48 lg:px-10 lg:pt-56 xl:pt-72 2xl:pt-80">
         <div className="grid gap-12 sm:grid-cols-2 xl:grid-cols-4 xl:gap-10">
           {/* Brand */}
           <Reveal origin="origin-left">

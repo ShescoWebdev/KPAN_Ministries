@@ -157,7 +157,7 @@ function FooterVideo({ src }) {
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-[#0e182e] text-white transition-colors duration-500 dark:bg-[#0b1426]">
+    <footer className="relative overflow-hidden bg-[#0d1527] text-white transition-colors duration-500 dark:bg-[#0b1426]">
       {/* Bottom Faint backdrop name */}
       <span aria-hidden="true" className={`${backdropName} md:hidden bottom-0 left-4 translate-y-[30%] sm:left-8`}>
         K-PAN

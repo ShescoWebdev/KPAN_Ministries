@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUp, ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react'
 import { FaFacebookF, FaInstagram, FaTiktok, FaXTwitter, FaYoutube } from 'react-icons/fa6'
@@ -43,6 +43,9 @@ const socialLinks = [
   { name: 'TikTok', href: '', icon: FaTiktok },
 ]
 
+// Footer video
+const FOOTER_VIDEO = 'https://res.cloudinary.com/detg3ravj/video/upload/v1791241769/Vid_10_zhzwgb.mp4'
+
 const linkClass =
   'font-brand-sans text-[15px] text-white/75 transition-colors duration-300 hover:text-[#ff6a00]'
 
@@ -61,6 +64,93 @@ function ColumnTitle({ children }) {
       <h3 className="font-brand-sans text-[11px] font-semibold uppercase tracking-[0.3em] text-[#ff6a00]">
         {children}
       </h3>
+    </div>
+  )
+}
+
+// Footer video component that plays when visible in viewport
+function FooterVideo({ src }) {
+  const videoRef = useRef(null)
+
+  // State to track visibility, hover, and play permission
+  const state = useRef({ visible: false, hovered: false, allowed: false })
+
+  // Play the video if allowed, visible, and not hovered
+  const playIfAllowed = () => {
+    const video = videoRef.current
+    const { visible, hovered, allowed } = state.current
+    if (!video || !allowed || !visible || hovered) return
+    const playPromise = video.play()
+    if (playPromise !== undefined) playPromise.catch(() => {})
+  }
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    video.muted = true
+
+    // Don't play the video if in reduced motion mode
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (!('IntersectionObserver' in window)) return
+
+    state.current.allowed = true
+
+    // Play/pause the video based on its visibility in viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        state.current.visible = entry.isIntersecting
+        if (entry.isIntersecting) {
+          playIfAllowed()
+        } else {
+          video.pause()
+        }
+      },
+      { threshold: 0.25 }
+    )
+
+    observer.observe(video)
+    return () => observer.disconnect()
+  }, [])
+
+  // Pause while the mouse is over the video, and resume when it leaves
+  const handleMouseEnter = () => {
+    state.current.hovered = true
+    videoRef.current?.pause()
+  }
+
+  const handleMouseLeave = () => {
+    state.current.hovered = false
+    playIfAllowed()
+  }
+
+  return (
+    <div
+      className="group relative aspect-video w-full overflow-hidden rounded-lg border-2 border-[#8c4716] bg-white/5 shadow-lg"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        // Cloudinary video poster photo
+        poster={src.replace('.mp4', '.jpg')}
+        muted
+        loop
+        playsInline
+        preload="none"
+        disablePictureInPicture
+        aria-hidden="true"
+        tabIndex={-1}
+        className="h-full w-full object-cover"
+      />
+
+      {/* Play/Pause indicator */}
+      <span
+        aria-hidden="true"
+        className="font-brand-sans pointer-events-none absolute bottom-2 right-2 rounded-full bg-black/60 px-2.5 py-1 text-[7px] font-semibold uppercase tracking-[0.2em] text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      >
+        Paused
+      </span>
     </div>
   )
 }
@@ -87,6 +177,11 @@ export default function Footer() {
             <p className="font-brand-sans mt-2 text-[10px] font-medium uppercase tracking-[0.22em] text-white/60 sm:text-xs">
               Touched · Transformed · Empowered
             </p>
+
+            {/* Footer video */}
+            <div className="mt-10 hidden xl:block">
+              <FooterVideo src={FOOTER_VIDEO} />
+            </div>
           </Reveal>
 
           {/* Address */}

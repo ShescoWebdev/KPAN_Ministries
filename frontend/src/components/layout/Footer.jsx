@@ -76,7 +76,7 @@ export default function Footer() {
         <div className="grid gap-12 sm:grid-cols-2 xl:grid-cols-4 xl:gap-10">
           {/* Brand */}
           <Reveal origin="origin-left">
-            <img src="/kpan logo white.png" alt="KPAN Logo" className="h-16 w-auto" />
+            <img src="/kpan logo white.png" alt="KPAN Logo" className="h-8 w-auto" />
             <p className="font-brand-serif mt-6 text-3xl italic text-white">One city, one family.</p>
             <p className="font-brand-sans mt-2 text-[10px] font-medium uppercase tracking-[0.22em] text-white/60 sm:text-xs">
               Touched · Transformed · Empowered

@@ -188,7 +188,7 @@ const chapters = [
     card: {
       day: 'Thursday',
       label: 'KPAN',
-      name: 'Bible Study Meeting',
+      name: 'Bible Study',
       venue: 'NAAT Multi-Purpose Hall, behind June 12 FACOOP Supermarket, UNIBEN',
       time: '4:00 PM',
       note: 'Every Thursday · 5th day of the week',

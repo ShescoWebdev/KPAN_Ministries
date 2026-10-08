@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, ChevronDown, ChevronLeft, ChevronRight, MapPin } from 'lucide-react'
+import { ArrowUpRight, ChevronDown, ChevronLeft, ChevronRight, MapPin, Radio } from 'lucide-react'
+import { FaTelegram } from 'react-icons/fa6'
 import Reveal from '../components/common/Reveal'
 
 // Hero videos
@@ -25,9 +26,13 @@ const LIVE_URL = 'https://youtube.com/@apstjoshuaokorie_kpan?si=MFTECfFDLTPz961h
 const labelClass =
   'font-brand-sans text-[11px] font-medium uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400 sm:text-xs'
 
+// Shared card link style
+const cardLinkClass =
+  'font-brand-sans mt-8 inline-flex items-center gap-2 border-b border-slate-400 pb-1 text-[15px] text-[#1c2333] transition-colors duration-300 hover:border-[#ff6a00] hover:text-[#ff6a00] dark:border-slate-500 dark:text-white sm:text-base'
+
 // Faint word sizes
 const INITIALS_SIZE = 'text-[length:clamp(8rem,28vw,24rem)]'
-const NAME_SIZE = 'text-[length:18vw] md:text-[length:clamp(5rem,11vw,11rem)]'
+const NAME_SIZE = 'text-[length:15vw] md:text-[length:clamp(4rem,9.5vw,10rem)]'
 
 // Italic orange heading word
 function Accent({ children }) {
@@ -47,26 +52,24 @@ function Eyebrow({ children }) {
 }
 
 // Giant faint backdrop word
-function Faint({ words, size, italic = false }) {
+function Faint({ text, size, italic = false }) {
   return (
     <span
       aria-hidden="true"
-      className={`font-brand-serif pointer-events-none -mb-[0.3em] block select-none leading-[0.8] text-[#ff6a00]/[0.07] dark:text-[#ff6a00]/[0.09] ${size} ${
+      className={`font-brand-serif pointer-events-none -mb-[0.3em] block select-none whitespace-normal leading-[0.85] text-[#ff6a00]/[0.07] md:whitespace-nowrap dark:text-[#ff6a00]/[0.09] ${size} ${
         italic ? 'italic' : ''
       }`}
     >
-      {words.map((word, i) => (
-        <span key={word} className="block md:inline">
-          {word}
-          {i < words.length - 1 ? ' ' : ''}
-        </span>
-      ))}
+      {text}
     </span>
   )
 }
 
 // Day, time and venue card
 function InfoCard({ card, line }) {
+  const VenueIcon = card.venueIcon ?? MapPin
+  const link = card.link ?? { label: 'Plan your visit', to: '/location' }
+
   return (
     <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition-colors duration-500 dark:border-white/10 dark:bg-[#05070f] sm:p-10">
       <div className="flex items-center gap-4">
@@ -80,7 +83,7 @@ function InfoCard({ card, line }) {
       </h3>
 
       <p className="font-brand-sans mt-6 flex items-start gap-3 text-[15px] leading-relaxed text-slate-600 dark:text-slate-300 sm:text-base">
-        <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[#ff6a00]" />
+        <VenueIcon className="mt-0.5 h-5 w-5 shrink-0 text-[#ff6a00]" />
         <span>{card.venue}</span>
       </p>
 
@@ -101,22 +104,26 @@ function InfoCard({ card, line }) {
         </div>
       )}
 
-      <Link
-        to="/location"
-        className="font-brand-sans mt-8 inline-flex items-center gap-2 border-b border-slate-400 pb-1 text-[15px] text-[#1c2333] transition-colors duration-300 hover:border-[#ff6a00] hover:text-[#ff6a00] dark:border-slate-500 dark:text-white sm:text-base"
-      >
-        Plan your visit
-        <ArrowUpRight className="h-4 w-4" />
-      </Link>
+      {link.href ? (
+        <a href={link.href} target="_blank" rel="noopener noreferrer" className={cardLinkClass}>
+          {link.label}
+          <ArrowUpRight className="h-4 w-4" />
+        </a>
+      ) : (
+        <Link to={link.to} className={cardLinkClass}>
+          {link.label}
+          <ArrowUpRight className="h-4 w-4" />
+        </Link>
+      )}
     </div>
   )
 }
 
-// Weekly chapters data
+// In-person chapters data
 const chapters = [
   {
     tag: 'Equip',
-    faint: ['Equipping', 'Meeting'],
+    faint: 'Equipping Meeting',
     faintSize: NAME_SIZE,
     faintItalic: true,
     title: (
@@ -142,10 +149,11 @@ const chapters = [
     image: '/Equipping Meeting.jpg',
     alt: 'Equipping Meeting',
     imageFirst: false,
+    landscape: true,
   },
   {
     tag: 'Connect',
-    faint: ['Cell', 'Meeting'],
+    faint: 'Cell Meeting',
     faintSize: NAME_SIZE,
     faintItalic: true,
     title: (
@@ -174,9 +182,9 @@ const chapters = [
   },
   {
     tag: 'Study',
-    faint: ['BS'],
-    faintSize: INITIALS_SIZE,
-    faintItalic: false,
+    faint: 'Bible Study',
+    faintSize: NAME_SIZE,
+    faintItalic: true,
     title: (
       <>
         Dive deep into the <Accent>Word</Accent> of God.
@@ -198,12 +206,13 @@ const chapters = [
       },
     },
     image: '/Bible Study.jpg',
-    alt: 'Bible Study Meeting',
+    alt: 'Bible Study',
     imageFirst: false,
+    landscape: true,
   },
   {
     tag: 'Pray',
-    faint: ['SOPS'],
+    faint: 'SOPS',
     faintSize: INITIALS_SIZE,
     faintItalic: false,
     title: (
@@ -232,14 +241,93 @@ const chapters = [
   },
 ]
 
+// Online chapters data
+const onlineChapters = [
+  {
+    tag: 'Light',
+    faint: 'Daily Sight',
+    faintSize: NAME_SIZE,
+    faintItalic: true,
+    title: (
+      <>
+        Let the Word be a <Accent>lamp</Accent> to your feet.
+      </>
+    ),
+    intro:
+      'A 30-minute word exhortation every weekday morning. Start your day in the Word and let it light your path.',
+    line: 'bg-[#229ed9]',
+    card: {
+      day: 'Monday – Friday',
+      label: '30 minutes word exhortation',
+      name: 'Daily Sight',
+      venue: 'KPAN Telegram · t.me/kpanministries',
+      venueIcon: FaTelegram,
+      time: '6:30 – 7:00 AM',
+      note: 'Every weekday · 2nd to 6th day of the week',
+      extra: {
+        label: 'Daily scripture',
+        text: '“Thy word is a lamp unto my feet, and a light unto my path.” (Psalm 119:105)',
+      },
+      link: { label: 'Join on Telegram', href: 'https://t.me/kpanministries' },
+    },
+    image: '/Daily Sight.jpg',
+    alt: 'Daily Sight',
+    imageFirst: false,
+    landscape: true,
+  },
+  {
+    tag: 'Kingdom',
+    faint: 'SOTK',
+    faintSize: INITIALS_SIZE,
+    faintItalic: false,
+    title: (
+      <>
+        See beyond the <Accent>natural</Accent>.
+      </>
+    ),
+    intro:
+      'School of the Kingdom is a class you don’t want to miss. Press deeper with us, beyond the natural and beyond the obvious, into the place where God gives eyes to see and ears to hear.',
+    line: 'bg-[#e0457b]',
+    card: {
+      day: 'Tuesday',
+      label: 'School of the Kingdom',
+      name: 'SOTK',
+      venue: 'Online stream · Facebook, YouTube & Mixlr',
+      venueIcon: Radio,
+      time: '8:00 PM',
+      note: 'Every Tuesday · 3rd day of the week',
+      extra: {
+        label: 'Don’t miss it',
+        text: 'Tune in live and invite someone to be part of it. Every stream link and download is in one place on our Media page.',
+      },
+      link: { label: 'Watch live & download', to: '/media' },
+    },
+    image: '/SOTK.jpeg',
+    alt: 'School of the Kingdom',
+    imageFirst: true,
+  },
+]
+
 // One weekly chapter
 function Chapter({ chapter, index }) {
   const number = String(index + 1).padStart(2, '0')
 
+  // Grid layout for chapter section )
+  const gridCols = chapter.landscape
+    ? chapter.imageFirst
+      ? 'lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]'
+      : 'lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]'
+    : 'lg:grid-cols-2'
+
+    // Image class for chapter section
+  const imageClass = chapter.landscape
+    ? 'mx-auto block h-auto w-full max-w-full rounded-2xl shadow-xl shadow-black/10 dark:shadow-black/40'
+    : 'mx-auto block h-auto max-h-[25rem] w-auto max-w-full rounded-2xl shadow-xl shadow-black/10 dark:shadow-black/40 sm:max-h-[30rem] md:max-h-[34rem] lg:max-h-[38rem]'
+
   return (
     <section className="relative overflow-hidden pt-16 md:pt-24">
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10">
-        <Faint words={chapter.faint} size={chapter.faintSize} italic={chapter.faintItalic} />
+        <Faint text={chapter.faint} size={chapter.faintSize} italic={chapter.faintItalic} />
 
         <div className="relative">
           <Reveal origin="origin-left">
@@ -262,14 +350,14 @@ function Chapter({ chapter, index }) {
             </Reveal>
           </div>
 
-          <div className="mt-12 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div className={`mt-12 grid items-center gap-10 ${gridCols} lg:gap-16`}>
             <Reveal delay={150}>
               <InfoCard card={chapter.card} line={chapter.line} />
             </Reveal>
 
             <Reveal delay={300} className={chapter.imageFirst ? 'lg:order-first' : ''}>
               <img
-                className="mx-auto block h-auto max-h-[25rem] w-auto max-w-full rounded-2xl shadow-xl shadow-black/10 dark:shadow-black/40 sm:max-h-[30rem] md:max-h-[34rem] lg:max-h-[38rem]"
+                className={imageClass}
                 src={chapter.image}
                 alt={chapter.alt}
                 loading="lazy"
@@ -638,7 +726,7 @@ function Home() {
       {/* Intro */}
       <section className="relative overflow-hidden pt-20 md:pt-28">
         <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10">
-          <Faint words={['TFC']} size={INITIALS_SIZE} />
+          <Faint text="TFC" size={INITIALS_SIZE} />
 
           <div className="relative">
             <Reveal origin="origin-left">
@@ -671,15 +759,15 @@ function Home() {
         </div>
       </section>
 
-      {/* Weekly chapters */}
+      {/* In-person chapters */}
       {chapters.map((chapter, i) => (
         <Chapter key={chapter.tag} chapter={chapter} index={i} />
       ))}
 
       {/* Watch live band */}
-      <section className="pb-24 pt-20 md:pb-32 md:pt-28">
+      <section className="pt-20 md:pt-28">
         <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10">
-          <div className="border-t border-slate-200 pt-10 dark:border-white/10">
+          <div className="border-b border-slate-200 pb-3 dark:border-white/10">
             <Reveal>
               <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
                 <p className="font-brand-sans flex items-start gap-4 text-lg text-slate-600 dark:text-slate-300 sm:items-center sm:text-xl">
@@ -706,6 +794,47 @@ function Home() {
           </div>
         </div>
       </section>
+
+      {/* Online services heading */}
+      <section className="relative overflow-hidden pt-20 md:pt-28">
+        <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10">
+          <Faint text="Online" size={NAME_SIZE} italic />
+
+          <div className="relative">
+            <Reveal origin="origin-left">
+              <Eyebrow>Online services</Eyebrow>
+            </Reveal>
+
+            <div className="mt-6 grid gap-8 lg:grid-cols-2 lg:items-end lg:gap-16">
+              <Reveal origin="origin-left" delay={100}>
+                <h2 className="font-brand-serif text-5xl leading-[1.02] tracking-tight text-[#1c2333] transition-colors duration-500 dark:text-white sm:text-6xl xl:text-7xl">
+                  Close to God, <Accent>wherever</Accent> you are.
+                </h2>
+              </Reveal>
+
+              <Reveal delay={200}>
+                <p className="font-brand-sans max-w-xl text-base leading-relaxed text-slate-600 transition-colors duration-500 dark:text-slate-300 sm:text-lg">
+                  Not every day of faith happens in a hall. Join us online for fresh Word, prayer and
+                  fellowship, from your phone, wherever life finds you.
+                </p>
+
+                <div className="mt-8 flex items-center gap-4">
+                  <span className="h-px min-w-6 flex-1 bg-slate-300 dark:bg-white/15" />
+                  <span className={`${labelClass} text-center`}>Join from anywhere</span>
+                  <span className="h-px min-w-6 flex-1 bg-slate-300 dark:bg-white/15" />
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Online chapters */}
+      <div className="pb-24 md:pb-32">
+        {onlineChapters.map((chapter, i) => (
+          <Chapter key={chapter.tag} chapter={chapter} index={chapters.length + i} />
+        ))}
+      </div>
     </div>
   )
 }

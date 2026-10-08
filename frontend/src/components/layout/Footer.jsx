@@ -32,15 +32,35 @@ const menuLinks = [
 
 // Social media links with icons
 const socialLinks = [
-  { name: 'Instagram', href: '', icon: FaInstagram },
+  { 
+    name: 'Instagram', 
+    href: 'https://www.instagram.com/kpanministries/', 
+    icon: FaInstagram
+   },
+
   {
     name: 'YouTube',
     href: 'https://youtube.com/@apstjoshuaokorie_kpan?si=MFTECfFDLTPz961h',
     icon: FaYoutube,
   },
-  { name: 'Facebook', href: '', icon: FaFacebookF },
-  { name: 'X', href: '', icon: FaXTwitter },
-  { name: 'TikTok', href: '', icon: FaTiktok },
+
+  { 
+    name: 'Facebook', 
+    href: ' https://web.facebook.com/JoshuaOkorieofficial', 
+    icon: FaFacebookF
+   },
+
+  { 
+    name: 'X', 
+    href: ' https://x.com/Apst_Joshua', 
+    icon: FaXTwitter 
+  },
+
+  { 
+    name: 'TikTok', 
+    href: 'https://www.tiktok.com/@apstjoshuaokorie', 
+    icon: FaTiktok
+  },
 ]
 
 // Footer video

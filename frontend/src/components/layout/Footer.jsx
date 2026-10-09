@@ -7,7 +7,8 @@ import Reveal from '../common/Reveal'
 const YEAR = new Date().getFullYear()
 
 // Contact information and address
-const contact = { phone: '+234 000 000 0000', email: 'info@example.com' }
+const contact = { phone: '+234 816 374 9203', email: 'kpan.ppp@gmail.com' }
+const contact2 = { phone: '+234 802 320 7500' }
 
 const address = [
   'NAAT Multi-Purpose Hall',
@@ -20,7 +21,7 @@ const MAP_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
 const services = [
   { day: 'Sunday', name: 'Equipping Meeting', time: '2:00 PM' },
   { day: 'Monday', name: 'Cell Meeting', time: '5:00 PM' },
-  { day: 'Thursday', name: 'Bible Study Meeting', time: '4:00 PM' },
+  { day: 'Thursday', name: 'Bible Study', time: '4:00 PM' },
   { day: 'Saturday', name: 'SOPS', time: '4:00 PM' },
 ]
 
@@ -46,13 +47,13 @@ const socialLinks = [
 
   { 
     name: 'Facebook', 
-    href: ' https://web.facebook.com/JoshuaOkorieofficial', 
+    href: 'https://www.facebook.com/JoshuaOkorieofficial', 
     icon: FaFacebookF
    },
 
   { 
     name: 'X', 
-    href: ' https://x.com/Apst_Joshua', 
+    href: 'https://x.com/Apst_Joshua', 
     icon: FaXTwitter 
   },
 
@@ -274,6 +275,15 @@ export default function Footer() {
               </li>
               <li>
                 <a
+                  href={`tel:${contact.phone.replace(/\s+/g, '')}`}
+                  className={`${linkClass} inline-flex items-center gap-3`}
+                >
+                  <Phone className="h-4 w-4 shrink-0 text-[#ff6a00]" />
+                  {contact2.phone}
+                </a>
+              </li>
+              <li>
+                <a
                   href={`mailto:${contact.email}`}
                   className={`${linkClass} inline-flex items-center gap-3 break-all`}
                 >
@@ -292,7 +302,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={name}
-                    className={`${socialCircle} opacity-40 hover:border-[#ff6a00] hover:bg-[#ff6a00] hover:text-white cursor-pointer`}
+                    className={`${socialCircle} hover:border-[#ff6a00] hover:bg-[#ff6a00] hover:text-white cursor-pointer`}
                   >
                     <Icon className="h-4 w-4" />
                   </a>
@@ -302,7 +312,7 @@ export default function Footer() {
                     role="img"
                     aria-label={`${name} link coming soon`}
                     title="Link coming soon"
-                    className={`${socialCircle} opacity-40 cursor-pointer hover:border-[#ff6a00] hover:bg-[#ff6a00] hover:text-white`}
+                    className={`${socialCircle} cursor-pointer`}
                   >
                     <Icon className="h-4 w-4 cursor-pointer" />
                   </span>

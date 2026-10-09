@@ -22,7 +22,7 @@ const isMobileView = () => window.matchMedia('(max-width: 767px)').matches
 // Live stream link
 const LIVE_URL = 'https://youtube.com/@apstjoshuaokorie_kpan?si=MFTECfFDLTPz961h'
 
-// Shared small label style
+// Shared label style
 const labelClass =
   'font-brand-sans text-[11px] font-medium uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400 sm:text-xs'
 
@@ -34,7 +34,7 @@ const cardLinkClass =
 const INITIALS_SIZE = 'text-[length:clamp(8rem,28vw,24rem)]'
 const NAME_SIZE = 'text-[length:15vw] md:text-[length:clamp(4rem,9.5vw,10rem)]'
 
-// Italic orange heading word
+// Italic heading word
 function Accent({ children }) {
   return <em className="italic text-[#ff6a00]">{children}</em>
 }
@@ -65,7 +65,7 @@ function Faint({ text, size, italic = false }) {
   )
 }
 
-// Day, time and venue card
+// Day, time and venue
 function InfoCard({ card, line }) {
   const VenueIcon = card.venueIcon ?? MapPin
   const link = card.link ?? { label: 'Plan your visit', to: '/location' }
@@ -119,7 +119,7 @@ function InfoCard({ card, line }) {
   )
 }
 
-// In-person chapters data
+// Chapters data
 const chapters = [
   {
     tag: 'Equip',
@@ -244,6 +244,38 @@ const chapters = [
 // Online chapters data
 const onlineChapters = [
   {
+    tag: 'Encounter',
+    faint: 'Activating Encounters',
+    faintSize: NAME_SIZE,
+    faintItalic: true,
+    title: (
+      <>
+        Encounters that change you <Accent>forever</Accent>.
+      </>
+    ),
+    intro:
+      'There are encounters that change men forever. There are moments in God’s presence that awaken purpose, ignite fresh fire, and shift destinies. Need someone to pray with? Join the ongoing session.',
+    line: 'bg-[#b3261e]',
+    card: {
+      day: 'Every weekday',
+      label: 'Midnight prayer feast',
+      name: 'Activating Encounters',
+      venue: 'Live on Telegram & Mixlr · K-pan Ministries',
+      venueIcon: FaTelegram,
+      time: '11:00 PM',
+      note: 'Monday to Friday · Live online',
+      extra: {
+        label: 'Come expectant',
+        text: 'Join us as we continue in the Spirit of Faith, in prayers and supplication. Come hungry, invite someone, and let’s press deeper together.',
+      },
+      link: { label: 'Join on Telegram', href: 'https://t.me/+CPRHMVf1F44wMWI0' },
+    },
+    image: '/Activating Encounters.jpg',
+    alt: 'Activating Encounters',
+    imageFirst: false,
+    landscape: true,
+  },
+  {
     tag: 'Light',
     faint: 'Daily Sight',
     faintSize: NAME_SIZE,
@@ -272,7 +304,7 @@ const onlineChapters = [
     },
     image: '/Daily Sight.jpg',
     alt: 'Daily Sight',
-    imageFirst: false,
+    imageFirst: true,
     landscape: true,
   },
   {
@@ -304,6 +336,37 @@ const onlineChapters = [
     },
     image: '/SOTK.jpeg',
     alt: 'School of the Kingdom',
+    imageFirst: false,
+  },
+  {
+    tag: 'Intercede',
+    faint: 'Intercession',
+    faintSize: NAME_SIZE,
+    faintItalic: true,
+    title: (
+      <>
+        Stand in the <Accent>gap</Accent> until His will prevails.
+      </>
+    ),
+    intro:
+      'Intercession is a ministry of standing in the gap. We gather to pray for one another, our communities, leaders, and nations—until God’s will prevails. Invite someone. Let’s take our place in prayer!',
+    line: 'bg-[#f5b301]',
+    card: {
+      day: 'Friday',
+      label: 'Online intercessory prayers',
+      name: 'Intercessory Prayers',
+      venue: 'Live on Telegram · K-PAN Ministries',
+      venueIcon: FaTelegram,
+      time: '9:00 PM',
+      note: 'Every Friday · 6th day of the week',
+      extra: {
+        label: 'The call to prayer',
+        text: '“I exhort therefore, that, first of all, supplications, prayers, intercessions, and giving of thanks, be made for all men” (1 Timothy 2:1)',
+      },
+      link: { label: 'Join us on Telegram', href: 'https://t.me/+CPRHMVf1F44wMWI0' },
+    },
+    image: '/Intercessory Prayers.jpeg',
+    alt: 'Intercessory Prayers',
     imageFirst: true,
   },
 ]
@@ -312,7 +375,7 @@ const onlineChapters = [
 function Chapter({ chapter, index }) {
   const number = String(index + 1).padStart(2, '0')
 
-  // Grid layout for chapter section )
+  // Layout for chapter section
   const gridCols = chapter.landscape
     ? chapter.imageFirst
       ? 'lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]'

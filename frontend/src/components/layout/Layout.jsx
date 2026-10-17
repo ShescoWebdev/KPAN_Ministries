@@ -4,7 +4,8 @@ import Footer from "./Footer";
 import Loader from "../common/Loader";
 import ScrollToTop from "../common/ScrollToTop";
 
-const HERO_ROUTES = ["/"];
+// Pages that displays the hero section
+const HERO_ROUTES = ["/", "/give", "/about", "/contact", "/blog", "/blog/:slug", "/media", "/events"];
 
 function Layout() {
   const { pathname } = useLocation();

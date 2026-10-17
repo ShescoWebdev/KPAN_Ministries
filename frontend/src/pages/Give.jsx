@@ -6,6 +6,9 @@ import Reveal from '../components/common/Reveal'
 // Flyer image path
 const FLYER = '/KPAN Financial Account Flyer.jpeg'
 
+// Hero background image path
+const HERO_IMAGE = '/Give-hero.jpeg'
+
 // Bank details
 const BANK = 'FirstBank Nigeria'
 const ACCOUNT_NAME = 'KPAN MINISTRIES'
@@ -110,9 +113,17 @@ function Give() {
     <div className="bg-[#F8F7F5] transition-colors duration-500 dark:bg-[#101828]">
       {/* Hero */}
       <section className="relative overflow-hidden">
+        {/* Hero background photo, sits under the colour overlay */}
+        <img
+          src={HERO_IMAGE}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+
         <div
           aria-hidden="true"
-          className="absolute inset-0"
+          className="absolute inset-0 opacity-80"
           style={{
             background:
               'radial-gradient(circle at 85% 15%, rgba(255, 106, 0, 0.28), transparent 45%), linear-gradient(135deg, #4e38a0 0%, #3a2684 55%, #22145c 100%)',

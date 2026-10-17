@@ -67,18 +67,18 @@ export default function Loader() {
         <img
           src="/kpan logo black.png"
           alt="Church Logo"
-          className="block h-12 w-auto sm:h-14 dark:hidden"
+          className="block h-7 w-auto sm:h-9 dark:hidden"
         />
         <img
           src="/kpan logo white.png"
           alt="Church Logo"
-          className="hidden h-12 w-auto sm:h-14 dark:block"
+          className="hidden h-7 w-auto sm:h-7 dark:block"
         />
       </div>
 
       <div className="h-36 w-36 animate-spin rounded-full sm:h-44 sm:w-44" style={ringStyle} />
 
-      <p className="font-brand-sans mt-8 font-medium italic text-lg text-[#9c813c] dark:text-white">Loading...</p>
+      <p className="loader-text font-brand-sans mt-8 font-medium text-lg text-[#9c813c] dark:text-white">Loading...</p>
     </div>
   )
 }

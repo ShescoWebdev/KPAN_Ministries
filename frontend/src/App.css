@@ -29,7 +29,7 @@
   }
 
 
-.home-h2 {
+.home-h2, .loader-text {
   font-family: 'Inter', sans-serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;

@@ -127,7 +127,7 @@ export default function Navbar({ hasHero = false }) {
   // Transparent over the hero at the top
   const solid = scrolled || isOpen || !hasHero
   const textTone = solid ? 'text-[#1c2333] dark:text-white' : 'text-white'
-  const logoSize = solid ? 'h-4 sm:h-6' : 'h-6 sm:h-8 xl:h-10'
+  const logoSize = solid ? 'h-5 sm:h-5' : 'h-5 sm:h-6 xl:h-7'
 
   const closeDesktop = () => setDesktopMenu((prev) => ({ ...prev, open: false }))
 
@@ -366,12 +366,12 @@ export default function Navbar({ hasHero = false }) {
         <div className="flex items-center justify-between bg-slate-100/70 px-5 py-4 dark:bg-white/5 sm:px-8">
           <NavLink to="/" onClick={closeMobile} className="shrink-0">
             <img
-              className="block h-12 w-auto sm:h-14 dark:hidden"
+              className="block h-7 w-auto sm:h-9 dark:hidden"
               src="/kpan logo black.png"
               alt="Church Logo"
             />
             <img
-              className="hidden h-12 w-auto sm:h-14 dark:block"
+              className="hidden h-7 w-auto sm:h-9 dark:block"
               src="/kpan logo white.png"
               alt="Church Logo"
             />

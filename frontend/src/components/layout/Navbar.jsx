@@ -19,9 +19,9 @@ const navLinks = [
   {
     name: 'Ministries',
     children: [
-      { name: 'The Fullness Church', path: '/ministries/the-fullness-church' },
+      { name: 'TFC', path: '/ministries/the-fullness-church' },
       { name: 'KSOM', path: '/ministries/ksom' },
-      { name: 'TFC', path: '/ministries/tfc' },
+      // { name: 'TFC', path: '/ministries/tfc' },
     ],
   },
   { name: 'Media', path: '/media' },

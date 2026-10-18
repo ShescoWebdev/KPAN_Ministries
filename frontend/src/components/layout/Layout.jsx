@@ -5,7 +5,14 @@ import Loader from "../common/Loader";
 import ScrollToTop from "../common/ScrollToTop";
 
 // Pages that displays the hero section
-const HERO_ROUTES = ["/", "/give", "/about", "/contact", "/blog", "/blog/:slug", "/media", "/events"];
+const HERO_ROUTES = [
+  "/", "/give", 
+  "/about", "/contact", 
+  "/get-involved/blog", "/get-involved/blog/:slug", 
+  "/media", 
+  "/events", 
+  "/about/who-we-are", "/about/leadership"
+];
 
 function Layout() {
   const { pathname } = useLocation();

@@ -38,10 +38,11 @@ const textLinkClass =
 const INITIALS_SIZE = 'text-[length:clamp(8rem,28vw,24rem)]'
 const NAME_SIZE = 'text-[length:15vw] md:text-[length:clamp(4rem,9.5vw,10rem)]'
 
-// Placeholder content: swap names, roles and bios, and drop photos into /public/leaders/<slug>.jpg
+// Leadership team data
 const people = [
   {
     slug: 'apostle-joshua-okorie',
+    image: '/Apostle.jpeg',
     title: 'Apostle',
     name: 'Joshua Okorie',
     role: 'Lead Pastor',
@@ -443,7 +444,7 @@ function ApostleSection({ person, onOpen }) {
               <div className="relative mx-auto w-full max-w-md lg:max-w-none">
                 <span
                   aria-hidden="true"
-                  className="absolute -bottom-4 -right-4 h-full w-full rounded-3xl border border-[#ff6a00]/60"
+                  className="absolute -top-1 -right-2 h-full w-full rounded-3xl border-4 border-black transition-colors duration-500 dark:border-white/10 sm:-top-2 sm:-right-3 bg-[#bd9376] dark:bg-[#ff6a00]/5"
                 />
                 <div className="relative aspect-[4/5] overflow-hidden rounded-3xl shadow-xl shadow-black/10 dark:shadow-black/40">
                   <Portrait person={person} className="h-full w-full" />

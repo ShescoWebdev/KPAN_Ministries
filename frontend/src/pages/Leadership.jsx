@@ -444,7 +444,7 @@ function ApostleSection({ person, onOpen }) {
               <div className="relative mx-auto w-full max-w-md lg:max-w-none">
                 <span
                   aria-hidden="true"
-                  className="absolute -top-1 -right-2 h-full w-full rounded-3xl border-4 border-black transition-colors duration-500 dark:border-white/10 sm:-top-2 sm:-right-3 bg-[#bd9376] dark:bg-[#ff6a00]/5"
+                  className="absolute -top-2 -right-2.5 h-full w-full rounded-3xl border-2 border-black/10 transition-colors duration-500 bg-[#87654e] dark:bg-[#87654e]/40"
                 />
                 <div className="relative aspect-[4/5] overflow-hidden rounded-3xl shadow-xl shadow-black/10 dark:shadow-black/40">
                   <Portrait person={person} className="h-full w-full" />
@@ -1007,7 +1007,7 @@ function LeaderDetail({ person, prev, next, state, onBack }) {
               <div className="relative mx-auto w-full max-w-md lg:max-w-none">
                 <span
                   aria-hidden="true"
-                  className="absolute -bottom-4 -right-4 h-full w-full rounded-3xl border border-[#ff6a00]/60"
+                  className="absolute -top-2 -right-2.5 h-full w-full rounded-3xl border-2 border-black/10 transition-colors duration-500 bg-[#87654e] dark:bg-[#87654e]/40"
                 />
                 <div className="relative aspect-[4/5] overflow-hidden rounded-3xl shadow-xl shadow-black/10 dark:shadow-black/40">
                   <Portrait person={person} loading="eager" className="h-full w-full" />

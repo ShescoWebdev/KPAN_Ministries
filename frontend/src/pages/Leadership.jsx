@@ -39,6 +39,36 @@ const INITIALS_SIZE = 'text-[length:clamp(8rem,28vw,24rem)]'
 const NAME_SIZE = 'text-[length:15vw] md:text-[length:clamp(4rem,9.5vw,10rem)]'
 
 // Leadership team data
+// LEADERSHIP TEAM DATA
+// ALL names, roles and bios below are PLACEHOLDERS. Replace every one before going live.
+//
+// ORDER
+//   The FIRST entry is the Apostle (shown in "The Apostle" section, keep him first).
+//   Every entry after him appears in the leaders grid, in this order.
+//   To add a leader, copy a whole { ... } block. To remove one, delete the block.
+//
+// CHANGE THESE FOR EACH PERSON
+//   slug    Lowercase name with hyphens, e.g. 'grace-idahosa'. Must be unique.
+//           It becomes the profile link (?leader=grace-idahosa) AND it decides the
+//           photo file name (see PHOTOS), so change them together.
+//   title   Apostle, Pastor, Minister, Evangelist, Sis, Bro... (shown before the name)
+//   name    Real name WITHOUT the title. The last word shows in orange italic.
+//   role    Short role label shown on the card and the profile page.
+//   serves  Where they serve, e.g. 'Cell Meetings'. Shows as "Serving in ..." on the profile.
+//   short   One or two sentences. Used on the card (cut at 3 lines) and in the Apostle section.
+//   bio     Full profile text, one string per paragraph. Add or remove paragraphs freely.
+//   verse   Scripture on the profile page: text (the verse) and ref (e.g. 'Psalm 23:1').
+//
+// PHOTOS
+//   Apostle: put the file in the public folder (public/Apostle.jpeg). If your file name
+//            differs, change his image: '/Apostle.jpeg' line.
+//   Others:  no image line is needed. The photo is read automatically from
+//            public/leaders/<slug>.jpg (e.g. public/leaders/grace-idahosa.jpg).
+//            If the file is .png or .jpeg, or named differently, add a line to that person:
+//            image: '/leaders/grace.png',
+//   Tips:    Use upright 4:5 photos (about 1000 x 1250 px, under 300 KB). File names are
+//            case-sensitive on Netlify, so spelling and capitals must match exactly.
+//            A missing photo shows the person's initials instead of a broken image.
 const people = [
   {
     slug: 'apostle-joshua-okorie',
@@ -59,20 +89,39 @@ const people = [
     },
   },
   {
-    slug: 'daniel-osagie',
+    slug: 'raphael-odion',
+    image: '',
     title: 'Pastor',
-    name: 'Daniel Osagie',
+    name: 'Raphael Odion',
     role: 'Associate Pastor',
     serves: 'Equipping Meeting',
     short:
       'Stands with the Apostle in shepherding the house, with a steady hand and a servant’s heart.',
     bio: [
-      'Pastor Daniel works closely with the Apostle in the day-to-day shepherding of the church, helping believers settle, grow and find their place in the family.',
+      'Pastor Raphael works closely with the Apostle in the day-to-day shepherding of the church, helping believers settle, grow and find their place in the family.',
       'He gives himself to patient teaching, open doors and walking with people through every season.',
     ],
     verse: {
       text: 'Be thou diligent to know the state of thy flocks, and look well to thy herds.',
       ref: 'Proverbs 27:23',
+    },
+  },
+  {
+    slug: 'meshack-ignatius',
+    image: '/Minister Meshack.jpeg',
+    title: 'Minister',
+    name: 'Meshack Ignatius',
+    role: 'Visual & Media Arts Minister',
+    serves: 'Projects visuals on screen',
+    short:
+      'Works with the media and oversees the best outputs for all videos, photos and audios.',
+    bio: [
+      'Minister Meshack overees that all necessary videos, audios, songs, texts, are cast on the big screen. Assisting the congregation to follow and sing along during worships, praises, prayers, etc.', 
+      'He also projects bible verses on the screen for the congregation to follow as well. He preceeds over the video and audio edits, makes sure that sermon sessions, worship sessions, praise sessions, etc are eidted to give out the best outputs for future uses.',
+    ],
+    verse: {
+      text: 'Write the vision, and make it plain upon tables, that he may run that readeth it.',
+      ref: 'Habakkuk 2:2',
     },
   },
   {

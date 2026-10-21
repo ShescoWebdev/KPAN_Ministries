@@ -78,7 +78,7 @@ const people = [
   },
   {
     slug: 'meshack-ignatius',
-    image: '/Minister Meshack.jpeg',
+    image: '/Meshack.jpeg',
     title: 'Minister',
     name: 'Meshack Ignatius',
     role: 'Visual & Media Arts Minister',

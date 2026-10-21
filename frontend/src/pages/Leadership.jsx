@@ -39,36 +39,6 @@ const INITIALS_SIZE = 'text-[length:clamp(8rem,28vw,24rem)]'
 const NAME_SIZE = 'text-[length:15vw] md:text-[length:clamp(4rem,9.5vw,10rem)]'
 
 // Leadership team data
-// LEADERSHIP TEAM DATA
-// ALL names, roles and bios below are PLACEHOLDERS. Replace every one before going live.
-//
-// ORDER
-//   The FIRST entry is the Apostle (shown in "The Apostle" section, keep him first).
-//   Every entry after him appears in the leaders grid, in this order.
-//   To add a leader, copy a whole { ... } block. To remove one, delete the block.
-//
-// CHANGE THESE FOR EACH PERSON
-//   slug    Lowercase name with hyphens, e.g. 'grace-idahosa'. Must be unique.
-//           It becomes the profile link (?leader=grace-idahosa) AND it decides the
-//           photo file name (see PHOTOS), so change them together.
-//   title   Apostle, Pastor, Minister, Evangelist, Sis, Bro... (shown before the name)
-//   name    Real name WITHOUT the title. The last word shows in orange italic.
-//   role    Short role label shown on the card and the profile page.
-//   serves  Where they serve, e.g. 'Cell Meetings'. Shows as "Serving in ..." on the profile.
-//   short   One or two sentences. Used on the card (cut at 3 lines) and in the Apostle section.
-//   bio     Full profile text, one string per paragraph. Add or remove paragraphs freely.
-//   verse   Scripture on the profile page: text (the verse) and ref (e.g. 'Psalm 23:1').
-//
-// PHOTOS
-//   Apostle: put the file in the public folder (public/Apostle.jpeg). If your file name
-//            differs, change his image: '/Apostle.jpeg' line.
-//   Others:  no image line is needed. The photo is read automatically from
-//            public/leaders/<slug>.jpg (e.g. public/leaders/grace-idahosa.jpg).
-//            If the file is .png or .jpeg, or named differently, add a line to that person:
-//            image: '/leaders/grace.png',
-//   Tips:    Use upright 4:5 photos (about 1000 x 1250 px, under 300 KB). File names are
-//            case-sensitive on Netlify, so spelling and capitals must match exactly.
-//            A missing photo shows the person's initials instead of a broken image.
 const people = [
   {
     slug: 'apostle-joshua-okorie',
@@ -90,11 +60,11 @@ const people = [
   },
   {
     slug: 'raphael-odion',
-    image: '',
+    image: '/Pastor Raphael.jpg',
     title: 'Pastor',
     name: 'Raphael Odion',
     role: 'Associate Pastor',
-    serves: 'Equipping Meeting',
+    serves: 'Meeting Facilitation (Every meeting, in person and online)',
     short:
       'Stands with the Apostle in shepherding the house, with a steady hand and a servant’s heart.',
     bio: [
@@ -125,20 +95,39 @@ const people = [
     },
   },
   {
-    slug: 'grace-idahosa',
-    title: 'Pastor',
-    name: 'Grace Idahosa',
-    role: 'Pastoral Care',
-    serves: 'Cell Meetings',
+    slug: 'victor-nwokolo',
+    image: '/Victor Nwokolo.jpg',
+    title: 'Minister',
+    name: 'Victor Nwokolo',
+    role: 'Manages service protocol activities',
+    serves: 'Audio & Sound Unit',
     short:
-      'Keeps watch over the flock, checking in, praying through and walking with members in every season.',
+      'Assists in coordinating church services by supporting ministers, and ensuring smooth service operations.',
     bio: [
-      'Pastor Grace oversees pastoral care across the church’s cells, making sure no one is left to walk alone.',
-      'Her ministry is quiet, consistent and personal: a call, a visit, a prayer at exactly the right time.',
+      'Minister Victor serves as the dedicated Audio & Stage Technician, ensuring every speaker, testifier, and minister is seamlessly equipped with a working microphone. He oversees pre-service sound checks to guarantee optimal audio quality for the entire congregation.',
+      'Beyond managing live audio transitions during the service, he coordinates the careful handling and breakdown of all musical instruments and equipment once service concludes, maintaining order and readiness for the next gathering.',
     ],
     verse: {
-      text: 'Bear ye one another’s burdens, and so fulfil the law of Christ.',
-      ref: 'Galatians 6:2',
+      text: 'Let all things be done decently and in order.',
+      ref: '1 Corinthians 14:40',
+    },
+  },
+  {
+    slug: 'oluchi-agadi',
+    image: '/Luchy.jpg',
+    title: 'Minister',
+    name: 'Oluchi Agadi',
+    role: 'Media',
+    serves: 'Media Unit',
+    short:
+      '',
+    bio: [
+      'Minister Oluchi serves with dedication in the Media Unit, helping to broadcast the message of the ministry and amplify its reach across digital and physical platforms. ',
+      'With a keen eye for technical excellence and communication, she ensures that every service, broadcast, and digital touchpoint engages the congregation seamlessly and projects the standard of the house.'
+    ],
+    verse: {
+      text: 'he Lord gave the word: great was the company of those that published it.',
+      ref: 'Psalm 68:11',
     },
   },
   {

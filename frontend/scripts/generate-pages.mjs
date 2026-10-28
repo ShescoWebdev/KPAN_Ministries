@@ -54,7 +54,7 @@ const headFor = (page) => {
   return lines
 }
 
-// Removes tags in html to prevent duplicates
+// To removes tags in html to prevent duplicates
 const strip = (html) =>
   html
     .replace(/<title\b[^>]*>[\s\S]*?<\/title>\s*/i, '')

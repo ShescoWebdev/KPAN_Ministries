@@ -2,33 +2,39 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/Main Kpan.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Isometra&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#3a2684" />
+    <link rel="icon" type="image/png" href="/Main%20Kpan.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
-      <script>
-        (function () {
-          try {
-            var saved = localStorage.getItem('theme');
-            var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (dark) document.documentElement.classList.add('dark');
-          } catch (e) {}
-        })();
-      </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Check this font exists -->
+    <link href="https://fonts.googleapis.com/css2?family=Isometra&display=swap" rel="stylesheet" />
 
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
 
-    <title>KPAN Ministries | No.1 Ivy Lodge, Ekhator
-Street, Ugbowo, Benin city.</title>
+    <title data-seo>K-PAN Ministries | The Fullness Church, Benin City</title>
+    <meta
+      data-seo
+      name="description"
+      content="KPAN Ministries, The Fullness Church in Benin City, Nigeria. Join our weekly meetings at UNIBEN or worship with us online from anywhere."
+    />
   </head>
   <body>
     <div id="root"></div>
+    <noscript>Please enable JavaScript to view K-PAN Ministries.</noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
